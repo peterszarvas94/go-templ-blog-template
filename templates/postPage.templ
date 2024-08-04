@@ -1,0 +1,25 @@
+package templates
+
+import (
+	"peterszarvas94/blog/pkg"
+)
+
+templ PostPage(post *pkg.FileInfo) {
+	<html>
+		<body>
+			@header()
+			<div>
+				<h2>{ post.Matter.Title }</h2>
+				<div>{ post.Date.String() }</div>
+				<ul>
+					for _, tag := range post.Matter.Tags {
+						<li>{ tag }</li>
+					}
+				</ul>
+				<div>
+					@pkg.Unsafe(post.Html)
+				</div>
+			</div>
+		</body>
+	</html>
+}

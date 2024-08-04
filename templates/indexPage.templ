@@ -1,0 +1,20 @@
+package templates
+
+import (
+	"peterszarvas94/blog/pkg"
+)
+
+templ IndexPage(posts *[]pkg.FileInfo) {
+	<html>
+		<body>
+			@header()
+			for _, post := range *posts {
+				<div>
+					<a href={ templ.SafeURL(pkg.GetPath(&post)) }>
+						{ post.Matter.Title }
+					</a>
+				</div>
+			}
+		</body>
+	</html>
+}
