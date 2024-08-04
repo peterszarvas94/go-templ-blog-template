@@ -2,24 +2,37 @@ package templates
 
 import (
 	"peterszarvas94/blog/pkg"
+	"fmt"
 )
 
 templ PostPage(post *pkg.FileInfo) {
-	<html>
-		<body>
-			@header()
-			<div>
-				<h2>{ post.Matter.Title }</h2>
-				<div>{ post.Date.String() }</div>
-				<ul>
-					for _, tag := range post.Matter.Tags {
-						<li>{ tag }</li>
-					}
-				</ul>
-				<div>
-					@pkg.Unsafe(post.Html)
+	@page(postBody(post))
+}
+
+templ postBody(post *pkg.FileInfo) {
+	<body>
+		@header()
+		<main>
+			<article id="post">
+				<h1>{ post.Matter.Title }</h1>
+				<time>{ post.Date.Format("2006-01-02") }</time>
+				<div id="tags">
+					<div>[</div>
+					<ul>
+						for _, tag := range post.Matter.Tags {
+							<li>
+								<a href={ templ.SafeURL(fmt.Sprintf("/tags/%s", tag)) }>
+									{ tag }
+								</a>
+							</li>
+						}
+					</ul>
+					<div>]</div>
 				</div>
-			</div>
-		</body>
-	</html>
+				<div>
+					@pkg.HtmlString(post.Html)
+				</div>
+			</article>
+		</main>
+	</body>
 }

@@ -17,6 +17,9 @@ func main() {
 
 	indexPage := templates.IndexPage(mdFiles)
 
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.Handle("/", templ.Handler(indexPage))
 	http.Handle("/posts/{year}/{month}/{day}/{filename}/{$}", http.HandlerFunc(handlePost))
 

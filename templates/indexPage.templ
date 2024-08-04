@@ -5,16 +5,18 @@ import (
 )
 
 templ IndexPage(posts *[]pkg.FileInfo) {
-	<html>
-		<body>
-			@header()
-			for _, post := range *posts {
-				<div>
-					<a href={ templ.SafeURL(pkg.GetPath(&post)) }>
-						{ post.Matter.Title }
-					</a>
-				</div>
-			}
-		</body>
-	</html>
+	@page(indexBody(posts))
+}
+
+templ indexBody(posts *[]pkg.FileInfo) {
+	<body>
+		@header()
+		for _, post := range *posts {
+			<div>
+				<a href={ templ.SafeURL(pkg.GetPath(&post)) }>
+					{ post.Matter.Title }
+				</a>
+			</div>
+		}
+	</body>
 }
