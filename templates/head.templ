@@ -4,5 +4,17 @@ templ head() {
 	<head>
 		<link rel="stylesheet" href="/static/preflight.css"/>
 		<link rel="stylesheet" href="/static/global.css"/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"
+			media="(prefers-color-scheme: light)"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css"
+			media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+		/>
+		<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+		<script>hljs.highlightAll();</script>
 	</head>
 }

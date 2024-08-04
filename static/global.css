@@ -62,3 +62,21 @@ body {
     }
   }
 }
+
+#content {
+  max-width: 1200px;
+
+  h2 {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+
+  p {
+    padding: 1rem 0;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding: 1rem 0 1rem 1rem;
+  }
+}
