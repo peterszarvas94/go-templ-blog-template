@@ -7,6 +7,9 @@ import (
 
 	"github.com/adrg/frontmatter"
 	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark-emoji"
+	// "github.com/yuin/goldmark-emoji/definition"
+	"github.com/yuin/goldmark/extension"
 )
 
 func parseFrontMatter(input string) (FrontMatter, string, error) {
@@ -21,8 +24,12 @@ func parseFrontMatter(input string) (FrontMatter, string, error) {
 }
 
 func parseFileContent(input string) (string, error) {
+	md := goldmark.New(
+		goldmark.WithExtensions(extension.GFM, emoji.Emoji),
+	)
+
 	var buf bytes.Buffer
-	if err := goldmark.Convert([]byte(input), &buf); err != nil {
+	if err := md.Convert([]byte(input), &buf); err != nil {
 		return "", err
 	}
 
