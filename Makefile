@@ -6,3 +6,6 @@ dev:
 
 gen:
 	go run ./cmd/gen
+
+start:
+	go run ./cmd/start

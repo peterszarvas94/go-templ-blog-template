@@ -4,17 +4,17 @@ import (
 	"peterszarvas94/blog/pkg"
 )
 
-templ IndexPage(posts *[]pkg.FileInfo) {
-	@page(indexBody(posts))
+templ IndexPage(files *[]pkg.FileData) {
+	@page(indexBody(files))
 }
 
-templ indexBody(posts *[]pkg.FileInfo) {
+templ indexBody(files *[]pkg.FileData) {
 	<body>
 		@header()
-		for _, post := range *posts {
+		for _, file:= range *files {
 			<div>
-				<a href={ templ.SafeURL(pkg.GetPath(&post)) }>
-					{ post.Matter.Title }
+				<a href={ templ.SafeURL(pkg.GetLinkHref(&file)) }>
+					{ file.Matter.Title }
 				</a>
 			</div>
 		}

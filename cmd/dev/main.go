@@ -10,17 +10,20 @@ import (
 )
 
 func main() {
-	mdFiles, err := pkg.GetMdFiles()
+	files, err := pkg.CollectFiles()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	indexPage := templates.IndexPage(mdFiles)
-
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	http.Handle("/", templ.Handler(indexPage))
+	notFoundPage := templates.NotFoundPage()
+	http.Handle("/", templ.Handler(notFoundPage))
+
+	indexPage := templates.IndexPage(files)
+	http.Handle("/{$}", templ.Handler(indexPage))
+
 	http.Handle("/posts/{year}/{month}/{day}/{filename}/{$}", http.HandlerFunc(handlePost))
 
 	http.ListenAndServe("localhost:8080", nil)

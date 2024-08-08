@@ -5,11 +5,11 @@ import (
 	"fmt"
 )
 
-templ PostPage(post *pkg.FileInfo) {
+templ PostPage(post *pkg.FileData) {
 	@page(postBody(post))
 }
 
-templ postBody(post *pkg.FileInfo) {
+templ postBody(post *pkg.FileData) {
 	<body>
 		@header()
 		<main>

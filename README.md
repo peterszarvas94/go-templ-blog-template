@@ -18,5 +18,5 @@
 
 - `make dev`: start dev server with hot reload [http://localhost:7331](http://localhost:7331)
 - `make templ`: start templ file generation in watch mode
-- `make build`: generate static HTML (not implemented yet)
+- `make gen`: generate static HTML files
 - `make start`: start prod server (not implemented yet)

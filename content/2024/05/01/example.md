@@ -4,19 +4,6 @@ category: "test"
 tags: ["markdown", "test", "example"]
 ---
 
----
-
-**Advertisement :)**
-
-- **[pica](https://nodeca.github.io/pica/demo/)** - high quality and fast image
-  resize in browser.
-- **[babelfish](https://github.com/nodeca/babelfish/)** - developer friendly
-  i18n with plurals support and easy syntax.
-
-You will like those projects!
-
----
-
 # h1 Heading 8-)
 
 ## h2 Heading
@@ -30,10 +17,6 @@ You will like those projects!
 ###### h6 Heading
 
 ## Horizontal Rules
-
----
-
----
 
 ---
 
@@ -53,10 +36,6 @@ test.. test... test..... test?..... test!....
 
 **This is bold text**
 
-**This is bold text**
-
-_This is italic text_
-
 _This is italic text_
 
 ~~Strikethrough~~
@@ -68,6 +47,23 @@ _This is italic text_
 > > ...by using additional greater-than signs right next to each other...
 > >
 > > > ...or with spaces between arrows.
+
+## Alerts
+
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
 
 ## Lists
 
@@ -235,6 +231,4 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 ### [Custom containers](https://github.com/markdown-it/markdown-it-container)
 
-::: warning
-_here be dragons_
-:::
+## heading {#id .className attrName=attrValue class="class1 class2"}

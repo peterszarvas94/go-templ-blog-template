@@ -1,0 +1,2 @@
+- [ ] add time to post header
+- [ ] fix subdir static serving

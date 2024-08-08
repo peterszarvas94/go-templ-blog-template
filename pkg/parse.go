@@ -2,14 +2,14 @@ package pkg
 
 import (
 	"bytes"
-	"path"
 	"strings"
 
 	"github.com/adrg/frontmatter"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark-emoji"
-	// "github.com/yuin/goldmark-emoji/definition"
+
 	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
 )
 
 func parseFrontMatter(input string) (FrontMatter, string, error) {
@@ -24,19 +24,22 @@ func parseFrontMatter(input string) (FrontMatter, string, error) {
 }
 
 func parseFileContent(input string) (string, error) {
-	md := goldmark.New(
-		goldmark.WithExtensions(extension.GFM, emoji.Emoji),
+	markdown := goldmark.New(
+		goldmark.WithExtensions(
+			extension.GFM,
+			extension.DefinitionList,
+			extension.Footnote,
+			emoji.Emoji,
+		),
+		goldmark.WithParserOptions(
+			parser.WithAttribute(),
+		),
 	)
 
 	var buf bytes.Buffer
-	if err := md.Convert([]byte(input), &buf); err != nil {
+	if err := markdown.Convert([]byte(input), &buf); err != nil {
 		return "", err
 	}
 
 	return buf.String(), nil
-}
-
-func GetPath(post *FileInfo) string {
-	withMd := path.Join("posts", post.Date.Format("2006/01/02"), post.Filename)
-	return withMd[:len(withMd)-3]
 }
