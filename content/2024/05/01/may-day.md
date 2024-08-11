@@ -1,7 +1,7 @@
 ---
 title: "May day"
 category: "holiday"
-tags: ["may", "day"]
+tags: ["may", "day", "test"]
 time: "12:49"
 ---
 

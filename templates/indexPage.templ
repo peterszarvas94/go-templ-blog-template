@@ -11,12 +11,15 @@ templ IndexPage(files *[]pkg.FileData) {
 templ indexBody(files *[]pkg.FileData) {
 	<body>
 		@header()
-		for _, file:= range *files {
-			<div>
-				<a href={ templ.SafeURL(pkg.GetLinkHref(&file)) }>
-					{ file.Matter.Title }
-				</a>
-			</div>
-		}
+		<main class="index-page">
+			<h1>Articles</h1>
+			for _, file:= range *files {
+				<div>
+					<a href={ templ.SafeURL(pkg.Href(&file)) }>
+						{ file.Matter.Title }
+					</a>
+				</div>
+			}
+		</main>
 	</body>
 }

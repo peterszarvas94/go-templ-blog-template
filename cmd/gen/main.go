@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path"
-
 	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/templates"
 )
@@ -16,12 +15,8 @@ func main() {
 		fmt.Println(err)
 	}
 
-	files, err := pkg.CollectFiles()
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	output := pkg.Config.PUBLIC_DIR
+
 	if _, err := os.Stat(output); !os.IsNotExist(err) {
 		err = os.RemoveAll(output)
 		if err != nil {
@@ -38,6 +33,11 @@ func main() {
 	}
 
 	fmt.Println("Generated public directory: ", output)
+
+	files, err := pkg.CollectFiles()
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	// index
 	indexFileName := path.Join(output, "index.html")
@@ -72,6 +72,29 @@ func main() {
 		}
 
 		fmt.Println("Generated post page:", postFileName)
+	}
+
+	// tags
+	tags := pkg.CollectTags()
+
+	for tag, files := range tags {
+		dir := path.Join(output, "tags", tag)
+		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
+			fmt.Println(err)
+		}
+
+		tagFileName := path.Join(dir, "index.html")
+		tagFile, err := os.Create(tagFileName)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		err = templates.TagPage(tag, files).Render(context.Background(), tagFile)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Println("Generated tag page:", tagFileName)
 	}
 
 	// static

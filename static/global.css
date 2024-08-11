@@ -41,7 +41,31 @@ body {
   color: var(--text);
 }
 
-.post {
+.index-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 2rem;
+    padding: 2rem 0;
+    font-style: italic;
+  }
+}
+
+.tag-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 2rem;
+    padding: 2rem 0;
+    font-style: italic;
+  }
+}
+
+.post-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,8 +90,8 @@ body {
       text-decoration: underline;
     }
   }
-}
 
-.markdown-body {
-  max-width: 1200px;
+  .markdown-body {
+    max-width: 1200px;
+  }
 }

@@ -14,7 +14,7 @@ func (e FileNotFoundError) Error() string {
 	return e.message
 }
 
-func FindFile(year, month, day, filename string) (*FileData, error) {
+func FindFileByDateAndName(year, month, day, filename string) (*FileData, error) {
 	yearInt, err := strconv.Atoi(year)
 	if err != nil {
 		return nil, err
@@ -42,4 +42,16 @@ func FindFile(year, month, day, filename string) (*FileData, error) {
 	return nil, FileNotFoundError{
 		message: fmt.Sprintf("file not found: %s/%s/%s/%s.md", year, month, day, filename),
 	}
+}
+
+func CollectTags() map[string][]*FileData {
+	tags := make(map[string][]*FileData)
+
+	for _, file := range files {
+		for _, tag := range file.Matter.Tags {
+			tags[tag] = append(tags[tag], &file)
+		}
+	}
+
+	return tags
 }

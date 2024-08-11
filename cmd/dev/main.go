@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/a-h/templ"
 	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/templates"
+
+	"github.com/a-h/templ"
 )
 
 func main() {
@@ -31,43 +31,8 @@ func main() {
 
 	http.Handle("/posts/{year}/{month}/{day}/{filename}/{$}", http.HandlerFunc(handlePost))
 
+	http.Handle("/tags/{tag}/{$}", http.HandlerFunc(handleTag))
+
 	fmt.Println("Server is running on http://localhost:8080")
 	http.ListenAndServe("localhost:8080", nil)
-}
-
-func handlePost(w http.ResponseWriter, r *http.Request) {
-	year := r.PathValue("year")
-	if year == "" {
-		http.Error(w, "missing year", http.StatusBadRequest)
-		return
-	}
-
-	month := r.PathValue("month")
-	if month == "" {
-		http.Error(w, "missing month", http.StatusBadRequest)
-		return
-	}
-
-	day := r.PathValue("day")
-	if day == "" {
-		http.Error(w, "missing day", http.StatusBadRequest)
-		return
-	}
-
-	filename := r.PathValue("filename")
-	if filename == "" {
-		http.Error(w, "missing name", http.StatusBadRequest)
-		return
-	}
-
-	file, err := pkg.FindFile(year, month, day, filename)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-	}
-
-	postPage := templates.PostPage(file)
-	handler := templ.Handler(postPage)
-
-	handler.ServeHTTP(w, r)
 }
