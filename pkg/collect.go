@@ -9,12 +9,6 @@ import (
 	"time"
 )
 
-type FrontMatter struct {
-	Title    string   `yaml:"title"`
-	Category string   `yaml:"category"`
-	Tags     []string `yaml:"tags"`
-}
-
 type FileData struct {
 	Filename string
 	Matter   FrontMatter
@@ -59,8 +53,6 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 		return fmt.Errorf("invalid day component in path: %s", path)
 	}
 
-	date := time.Date(yearInt, time.Month(monthInt), dayInt, 0, 0, 0, 0, time.UTC)
-
 	contentBytes, err := os.ReadFile(path)
 	if err != nil {
 		return fmt.Errorf("failed to read file: %s", path)
@@ -71,6 +63,37 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	if err != nil {
 		return fmt.Errorf("failed to parse front matter: %s", path)
 	}
+
+	hours := matter.Time[:2]
+	hoursInt, err := strconv.Atoi(hours)
+	if err != nil {
+		return fmt.Errorf("invalid hour component in front matter: %s", path)
+	}
+
+	if hoursInt < 0 || hoursInt > 23 {
+		return fmt.Errorf("invalid hour component in front matter: %s", path)
+	}
+
+	minutes := matter.Time[3:]
+	minutesInt, err := strconv.Atoi(minutes)
+	if err != nil {
+		return fmt.Errorf("invalid minute component in front matter: %s", path)
+	}
+
+	if minutesInt < 0 || minutesInt > 59 {
+		return fmt.Errorf("invalid minute component in front matter: %s", path)
+	}
+
+	date := time.Date(
+		yearInt,
+		time.Month(monthInt),
+		dayInt,
+		hoursInt,
+		minutesInt,
+		0,
+		0,
+		time.UTC,
+	)
 
 	html, err := parseFileContent(rawBody)
 	if err != nil {

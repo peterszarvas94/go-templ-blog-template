@@ -1,4 +1,4 @@
-- [ ] add time to post header
+- [x] add time to post header
 - [x] fix subdir static serving
 - [ ] tag links
 - [ ] main page

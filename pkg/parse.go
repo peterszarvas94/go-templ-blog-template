@@ -7,10 +7,16 @@ import (
 	"github.com/adrg/frontmatter"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark-emoji"
-
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
 )
+
+type FrontMatter struct {
+	Title    string   `yaml:"title"`
+	Category string   `yaml:"category"`
+	Tags     []string `yaml:"tags"`
+	Time     string   `yaml:"time"`
+}
 
 func parseFrontMatter(input string) (FrontMatter, string, error) {
 	var frontMatter FrontMatter

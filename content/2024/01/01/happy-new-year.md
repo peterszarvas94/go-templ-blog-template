@@ -2,6 +2,7 @@
 title: "Happy new year"
 category: "holiday"
 tags: ["newyear"]
+time: "00:00"
 ---
 
 ## Happy new year!

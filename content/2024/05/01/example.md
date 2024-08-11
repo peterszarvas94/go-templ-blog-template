@@ -2,6 +2,7 @@
 title: "Example"
 category: "test"
 tags: ["markdown", "test", "example"]
+time: "12:32"
 ---
 
 # h1 Heading 8-)
@@ -232,3 +233,5 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 ### [Custom containers](https://github.com/markdown-it/markdown-it-container)
 
 ## heading {#id .className attrName=attrValue class="class1 class2"}
+
+Above is heading with custom attributes

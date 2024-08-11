@@ -2,6 +2,7 @@
 title: "May day"
 category: "holiday"
 tags: ["may", "day"]
+time: "12:49"
 ---
 
 ## May day, may day, we are sinking
