@@ -1,2 +1,5 @@
 - [ ] add time to post header
-- [ ] fix subdir static serving
+- [x] fix subdir static serving
+- [ ] tag links
+- [ ] main page
+- [ ] cool theme

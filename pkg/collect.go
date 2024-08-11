@@ -98,7 +98,7 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 func CollectFiles() (*[]FileData, error) {
 	files = files[:0]
 
-	dirName := "content"
+	dirName := Config.CONTENT_DIR
 
 	err := filepath.Walk(dirName, walkContentDir)
 	if err != nil {

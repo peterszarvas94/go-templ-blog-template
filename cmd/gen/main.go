@@ -6,20 +6,22 @@ import (
 	"os"
 	"path"
 
-	// "net/http"
 	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/templates"
-	//
-	// "github.com/a-h/templ"
 )
 
 func main() {
+	err := pkg.LoadEnvs()
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	files, err := pkg.CollectFiles()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	output := "public"
+	output := pkg.Config.PUBLIC_DIR
 	if _, err := os.Stat(output); !os.IsNotExist(err) {
 		err = os.RemoveAll(output)
 		if err != nil {
@@ -37,6 +39,7 @@ func main() {
 
 	fmt.Println("Generated public directory: ", output)
 
+	// index
 	indexFileName := path.Join(output, "index.html")
 	indexFile, err := os.Create(indexFileName)
 	if err != nil {
@@ -48,10 +51,11 @@ func main() {
 		fmt.Println(err)
 	}
 
-	fmt.Println("Generated index page:", indexFileName)
+	fmt.Println("Generated home page:", indexFileName)
 
+	// posts
 	for _, file := range *files {
-		dir := path.Join(output, file.Date.Format("2006/01/02"), file.Filename)
+		dir := path.Join(output, "posts", file.Date.Format("2006/01/02"), file.Filename)
 		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
 			fmt.Println(err)
 		}
@@ -69,6 +73,14 @@ func main() {
 
 		fmt.Println("Generated post page:", postFileName)
 	}
+
+	// static
+	err = pkg.CopyFlatDir(pkg.Config.STATIC_DIR, "public/static")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("Copied static files:", "public/static")
 
 	fmt.Println("Done")
 }
