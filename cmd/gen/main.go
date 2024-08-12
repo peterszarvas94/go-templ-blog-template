@@ -10,12 +10,7 @@ import (
 )
 
 func main() {
-	err := pkg.LoadEnvs()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	output := pkg.Config.PUBLIC_DIR
+	output := pkg.Config.PublicDir
 
 	if _, err := os.Stat(output); !os.IsNotExist(err) {
 		err = os.RemoveAll(output)
@@ -26,7 +21,7 @@ func main() {
 		fmt.Println("Removed existing directory: ", output)
 	}
 
-	err = os.Mkdir(output, 0755)
+	err := os.Mkdir(output, 0755)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -98,7 +93,7 @@ func main() {
 	}
 
 	// static
-	err = pkg.CopyFlatDir(pkg.Config.STATIC_DIR, "public/static")
+	err = pkg.CopyFlatDir(pkg.Config.StaticDir, "public/static")
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -10,17 +10,12 @@ import (
 )
 
 func main() {
-	err := pkg.LoadEnvs()
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	files, err := pkg.CollectFiles()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fs := http.FileServer(http.Dir(pkg.Config.STATIC_DIR))
+	fs := http.FileServer(http.Dir(pkg.Config.StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	notFoundPage := templates.NotFoundPage()

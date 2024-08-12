@@ -3,3 +3,4 @@
 - [x] tag links
 - [x] main page
 - [ ] cool theme
+- [ ] file based routing in content (but keep "tags" as is -> forbidden dir)

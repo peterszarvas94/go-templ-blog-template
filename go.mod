@@ -5,8 +5,6 @@ go 1.22.5
 require (
 	github.com/a-h/templ v0.2.747
 	github.com/adrg/frontmatter v0.2.0
-	github.com/joho/godotenv v1.5.1
-	github.com/peterszarvas94/configloader v1.1.2
 	github.com/yuin/goldmark v1.7.4
 	github.com/yuin/goldmark-emoji v1.0.3
 )
