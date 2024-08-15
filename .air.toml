@@ -2,8 +2,8 @@ root = "."
 tmp_dir = "bin"
 
 [build]
-  bin = "./bin/dev"
-  cmd = "go build -o ./bin/dev ./cmd/dev"
+  bin = "./bin/ssr"
+  cmd = "go build -o ./bin/ssr ./cmd/ssr"
   delay = 100
   exclude_dir = ["bin"]
   include_ext = ["go", "md"]

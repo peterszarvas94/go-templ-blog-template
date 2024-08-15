@@ -12,7 +12,7 @@ templ PostPage(post *pkg.FileData) {
 templ postBody(post *pkg.FileData) {
 	<body>
 		@header()
-		<main class="post-page">
+		<main class="page post-page">
 			<h1>{ post.Matter.Title }</h1>
 			<time>{ post.Date.Format("2006-01-02 15:04") }</time>
 			<div class="tags">
@@ -20,7 +20,7 @@ templ postBody(post *pkg.FileData) {
 				<ul>
 					for _, tag := range post.Matter.Tags {
 						<li>
-							<a href={ templ.SafeURL(fmt.Sprintf("/tags/%s", tag)) }>
+							<a href={ templ.SafeURL(fmt.Sprintf("/tag/%s", tag)) }>
 								{ tag }
 							</a>
 						</li>
@@ -28,9 +28,9 @@ templ postBody(post *pkg.FileData) {
 				</ul>
 				<div>]</div>
 			</div>
-			<div class="markdown-body">
+			<article class="markdown-body">
 				@pkg.HtmlString(post.Html)
-			</div>
+			</article>
 		</main>
 	</body>
 }

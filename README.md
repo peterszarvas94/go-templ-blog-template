@@ -16,7 +16,12 @@
 
 ## Commands
 
+### SSR
+
 - `make dev`: start dev server with hot reload [http://localhost:7331](http://localhost:7331)
 - `make templ`: start templ file generation in watch mode
+
+### SSG
+
 - `make gen`: generate static HTML files
-- `make serve`: start prod server [http://localhost:8080](http://localhost:8080)
+- `make serve`: start prod server [http://localhost:8080](http://localhost:8080) (SSG mode)

@@ -12,11 +12,11 @@ templ TagPage(tag string, files []*pkg.FileData) {
 templ tagBody(tag string, files []*pkg.FileData) {
 	<body>
 		@header()
-		<main class="tag-page">
+		<main class="page tag-page">
 			<h1>{ fmt.Sprintf("#%s", tag) }</h1>
 			for _, file:= range files {
 				<div>
-					<a href={ templ.SafeURL(pkg.Href(file)) }>
+					<a href={ templ.SafeURL(file.Filename) }>
 						{ file.Matter.Title }
 					</a>
 				</div>

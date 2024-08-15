@@ -41,19 +41,7 @@ body {
   color: var(--text);
 }
 
-.index-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    font-size: 2rem;
-    padding: 2rem 0;
-    font-style: italic;
-  }
-}
-
-.tag-page {
+.page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,16 +54,6 @@ body {
 }
 
 .post-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    font-size: 2rem;
-    padding: 2rem 0;
-    font-style: italic;
-  }
-
   .tags {
     display: flex;
     gap: 0.5rem;
@@ -93,5 +71,6 @@ body {
 
   .markdown-body {
     max-width: 1200px;
+    padding: 4rem 0;
   }
 }

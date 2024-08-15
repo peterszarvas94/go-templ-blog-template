@@ -1,6 +1,0 @@
-- [x] add time to post header
-- [x] fix subdir static serving
-- [x] tag links
-- [x] main page
-- [ ] cool theme
-- [ ] file based routing in content (but keep "tags" as is -> forbidden dir)
