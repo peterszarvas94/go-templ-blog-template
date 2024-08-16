@@ -52,10 +52,10 @@ _This is italic text_
 ## Alerts
 
 > [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
+> Highlights information that users should take into account, even when
+> skimming.
 
-> [!TIP]
-> Optional information to help a user be more successful.
+> [!TIP] Optional information to help a user be more successful.
 
 > [!IMPORTANT]  
 > Crucial information necessary for users to succeed.
@@ -63,8 +63,7 @@ _This is italic text_
 > [!WARNING]  
 > Critical content demanding immediate user attention due to potential risks.
 
-> [!CAUTION]
-> Negative potential consequences of an action.
+> [!CAUTION] Negative potential consequences of an action.
 
 ## Lists
 
@@ -167,7 +166,9 @@ The killer feature of `markdown-it` is very effective support of
 >
 > Shortcuts (emoticons): :-) :-( 8-) ;)
 
-see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
+see
+[how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output)
+with twemoji.
 
 ### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
 
@@ -202,8 +203,7 @@ Duplicated footnote reference[^second].
 
 Term 1
 
-: Definition 1
-with lazy continuation.
+: Definition 1 with lazy continuation.
 
 Term 2 with _inline markup_
 
@@ -215,12 +215,9 @@ Term 2 with _inline markup_
 
 _Compact style:_
 
-Term 1
-~ Definition 1
+Term 1 ~ Definition 1
 
-Term 2
-~ Definition 2a
-~ Definition 2b
+Term 2 ~ Definition 2a ~ Definition 2b
 
 ### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
 

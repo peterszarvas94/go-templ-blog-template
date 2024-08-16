@@ -13,6 +13,7 @@ time: "12:49"
 - [x] main page
 - [ ] generalizing:
   - [x] file based routing in content
+  - [ ] themeing support
   - [ ] cool default [theme(s)](#theme)
 
 ## Theme {#theme}
@@ -28,3 +29,14 @@ A theme contains `templ` + `css` files.
 You can select which them you want to use, in the config file.
 
 If there is no such template, it will fall back to the default one.
+
+Themes required to have some pages which are implementing certain interfaces
+
+### Interfaces
+
+Every theme should implement the following interfaces:
+
+- indexPage
+- postPage
+- 404
+- ...

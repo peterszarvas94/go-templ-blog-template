@@ -7,7 +7,8 @@ time: "00:00"
 
 ## Happy new year!
 
-New Year is a widely celebrated occasion in the United Kingdom, marking the end of one year and the beginning of another.
+New Year is a widely celebrated occasion in the United Kingdom, marking the end
+of one year and the beginning of another.
 
 Top New Year Activities in the UK include:
 

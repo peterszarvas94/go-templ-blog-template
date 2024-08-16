@@ -1,18 +1,19 @@
 package templates
 
 import (
+	"fmt"
 	"peterszarvas94/blog/pkg"
 )
 
-templ IndexPage(files []*pkg.FileData) {
-	@page(indexBody(files))
+templ TagPage(tag string, files []*pkg.FileData) {
+	@page(tagBody(tag, files))
 }
 
-templ indexBody(files []*pkg.FileData) {
+templ tagBody(tag string, files []*pkg.FileData) {
 	<body>
 		@header()
-		<main class="page index-page">
-			<h1>Articles</h1>
+		<main class="page tag-page">
+			<h1>{ fmt.Sprintf("#%s", tag) }</h1>
 			for _, file:= range files {
 				<div>
 					<a href={ templ.SafeURL(file.Filename) }>

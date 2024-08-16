@@ -11,12 +11,23 @@ import (
 	"github.com/a-h/templ"
 )
 
-type fileExists struct {
-	exists bool
-	file   *pkg.FileData
+type ContentHandler struct{}
+
+type Pages struct {
+	notFoundPage pkg.NotFoundPage
+	indexPage    pkg.IndexPage
+	postPage     pkg.PostPage
+	tagPage      pkg.TagPage
+	categoryPage pkg.CategoryPage
 }
 
-type ContentHandler struct{}
+var components = &Pages{
+	notFoundPage: templates.NotFoundPage,
+	indexPage:    templates.IndexPage,
+	postPage:     templates.PostPage,
+	tagPage:      templates.TagPage,
+	categoryPage: templates.CategoryPage,
+}
 
 func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// TODO: assert CheckContentDir has run
@@ -24,29 +35,24 @@ func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if url == "/" {
 		files := pkg.GetFiles()
-		indexPage := templates.IndexPage(files)
-		indexHandler := templ.Handler(indexPage)
-		indexHandler.ServeHTTP(w, r)
+		handler := templ.Handler(components.indexPage(files))
+		handler.ServeHTTP(w, r)
 		return
 	}
 
 	if strings.HasPrefix(url, "/tag") {
-		// TODO: handle tag
-		tag := strings.TrimPrefix(url, "/tag/")
+		tag := path.Base(url)
 		fmt.Println("tag", tag)
 
 		tags := pkg.CollectTags()
 		files := tags[tag]
-
-		tagPage := templates.TagPage(tag, files)
-		handler := templ.Handler(tagPage)
-
+		handler := templ.Handler(components.tagPage(tag, files))
 		handler.ServeHTTP(w, r)
 		return
 	}
 
 	if strings.HasPrefix(url, "/category") {
-		// TODO: handle tag
+		// TODO: category
 	}
 
 	pathToFile := path.Join(pkg.Config.ContentDir, url)
@@ -55,15 +61,11 @@ func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	file, err := pkg.FindFileFromFilePath(pathToFileWithExtension)
 	if err != nil {
-		notFoundPage := templates.NotFoundPage()
-		handler := templ.Handler(notFoundPage)
-
+		handler := templ.Handler(components.notFoundPage())
 		handler.ServeHTTP(w, r)
 		return
 	}
 
-	postPage := templates.PostPage(file)
-	handler := templ.Handler(postPage)
-
+	handler := templ.Handler(components.postPage(file))
 	handler.ServeHTTP(w, r)
 }

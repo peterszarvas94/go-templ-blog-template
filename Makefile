@@ -1,12 +1,12 @@
-# dev:
-
-dev:
-	air -c .air.toml
+# dev mode:
 
 templ:
 	templ generate --watch --proxy="http://localhost:8080/" --open-browser="false"
 
-# ssr:
+dev:
+	air -c .air.toml
+
+# ssr mode:
 
 build:
 	go build -o ./bin/ssr ./cmd/ssr
@@ -14,10 +14,22 @@ build:
 ssr:
 	./bin/ssr
 	
-# ssg:
+# ssg mode:
 
 gen:
 	go run ./cmd/gen
 
 ssg:
 	go run ./cmd/ssg
+
+# theme switch:
+# e.g. make theme name=default
+
+theme:
+	@if [ -d "themes/$(name)/static" ]; then \
+		cp -r themes/$(name)/static/* static; \
+		cp themes/$(name)/templates/*.templ templates 2>/dev/null || true; \
+		echo "Theme '$(name)' applied."; \
+	else \
+		echo "Theme '$(name)' not found."; \
+	fi

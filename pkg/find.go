@@ -35,7 +35,7 @@ func FindFileByDateAndName(year, month, day, filename string) (*FileData, error)
 			int(file.Date.Month()) == monthInt &&
 			file.Date.Day() == dayInt &&
 			strings.TrimSuffix(file.Filename, ".md") == filename {
-			return &file, nil
+			return file, nil
 		}
 	}
 
@@ -49,7 +49,7 @@ func CollectTags() map[string][]*FileData {
 
 	for _, file := range files {
 		for _, tag := range file.Matter.Tags {
-			tags[tag] = append(tags[tag], &file)
+			tags[tag] = append(tags[tag], file)
 		}
 	}
 

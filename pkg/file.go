@@ -16,22 +16,22 @@ type FileData struct {
 	Path     string
 }
 
-var files []FileData
+var files []*FileData
 
 func FindFileFromFilePath(filePath string) (*FileData, error) {
 	// TODO: assert collect files is run (not nil)
 
 	for _, file := range files {
 		if file.Path == filePath {
-			return &file, nil
+			return file, nil
 		}
 	}
 
 	return nil, fmt.Errorf("file not found: %s", filePath)
 }
 
-func GetFiles() *[]FileData {
-	return &files
+func GetFiles() []*FileData {
+	return files
 }
 
 func CollectFiles() error {
@@ -76,7 +76,7 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	filename = strings.TrimPrefix(filename, Config.ContentDir)
 
 	// Get the first part (before the dot)
-	file := FileData{
+	file := &FileData{
 		Filename: filename,
 		Matter:   matter,
 		Date:     time.Now(), // TODO
