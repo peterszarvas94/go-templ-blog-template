@@ -15,3 +15,4 @@ time: "12:49"
   - [x] file based routing in content
   - [x] themeing support
   - [ ] cool default [theme(s)](#theme)
+- [ ] category page
