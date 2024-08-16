@@ -4,38 +4,23 @@ import (
 	"fmt"
 	"net/http"
 	"path"
+	"peterszarvas94/blog/config"
+	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
-	"peterszarvas94/blog/templates"
 	"strings"
 
 	"github.com/a-h/templ"
 )
 
-type ContentHandler struct{}
+type contentHandler struct{}
 
-type Pages struct {
-	notFoundPage pkg.NotFoundPage
-	indexPage    pkg.IndexPage
-	postPage     pkg.PostPage
-	tagPage      pkg.TagPage
-	categoryPage pkg.CategoryPage
-}
-
-var components = &Pages{
-	notFoundPage: templates.NotFoundPage,
-	indexPage:    templates.IndexPage,
-	postPage:     templates.PostPage,
-	tagPage:      templates.TagPage,
-	categoryPage: templates.CategoryPage,
-}
-
-func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// TODO: assert CheckContentDir has run
 	url := r.URL.Path
 
 	if url == "/" {
 		files := pkg.GetFiles()
-		handler := templ.Handler(components.indexPage(files))
+		handler := templ.Handler(pages.Index(files))
 		handler.ServeHTTP(w, r)
 		return
 	}
@@ -44,9 +29,9 @@ func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		tag := path.Base(url)
 		fmt.Println("tag", tag)
 
-		tags := pkg.CollectTags()
+		tags := pkg.GetTags()
 		files := tags[tag]
-		handler := templ.Handler(components.tagPage(tag, files))
+		handler := templ.Handler(pages.Tag(tag, files))
 		handler.ServeHTTP(w, r)
 		return
 	}
@@ -55,17 +40,17 @@ func (h *ContentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// TODO: category
 	}
 
-	pathToFile := path.Join(pkg.Config.ContentDir, url)
+	pathToFile := path.Join(config.Dirs.Content, url)
 
 	pathToFileWithExtension := fmt.Sprintf("%s.md", pathToFile)
 
 	file, err := pkg.FindFileFromFilePath(pathToFileWithExtension)
 	if err != nil {
-		handler := templ.Handler(components.notFoundPage())
+		handler := templ.Handler(pages.NotFound())
 		handler.ServeHTTP(w, r)
 		return
 	}
 
-	handler := templ.Handler(components.postPage(file))
+	handler := templ.Handler(pages.Post(file))
 	handler.ServeHTTP(w, r)
 }

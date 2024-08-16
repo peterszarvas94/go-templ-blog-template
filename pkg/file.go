@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"peterszarvas94/blog/config"
 	"strings"
 	"time"
 )
@@ -18,18 +19,6 @@ type FileData struct {
 
 var files []*FileData
 
-func FindFileFromFilePath(filePath string) (*FileData, error) {
-	// TODO: assert collect files is run (not nil)
-
-	for _, file := range files {
-		if file.Path == filePath {
-			return file, nil
-		}
-	}
-
-	return nil, fmt.Errorf("file not found: %s", filePath)
-}
-
 func GetFiles() []*FileData {
 	return files
 }
@@ -37,7 +26,7 @@ func GetFiles() []*FileData {
 func CollectFiles() error {
 	files = files[:0]
 
-	dirName := Config.ContentDir
+	dirName := config.Dirs.Content
 
 	err := filepath.Walk(dirName, walkContentDir)
 	if err != nil {
@@ -73,7 +62,7 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	}
 
 	filename := strings.TrimSuffix(path, ".md")
-	filename = strings.TrimPrefix(filename, Config.ContentDir)
+	filename = strings.TrimPrefix(filename, config.Dirs.Content)
 
 	// Get the first part (before the dot)
 	file := &FileData{
@@ -86,4 +75,27 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	files = append(files, file)
 
 	return nil
+}
+
+func FindFileFromFilePath(filePath string) (*FileData, error) {
+	// TODO: assert collect files is run (not nil)
+	for _, file := range files {
+		if file.Path == filePath {
+			return file, nil
+		}
+	}
+
+	return nil, fmt.Errorf("file not found: %s", filePath)
+}
+
+func GetTags() map[string][]*FileData {
+	tags := make(map[string][]*FileData)
+
+	for _, file := range files {
+		for _, tag := range file.Matter.Tags {
+			tags[tag] = append(tags[tag], file)
+		}
+	}
+
+	return tags
 }

@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"peterszarvas94/blog/config"
+	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
-	"peterszarvas94/blog/templates"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 		panic(err)
 	}
 
-	publicDir := pkg.Config.PublicDir
+	publicDir := config.Dirs.Public
 
 	if _, err := os.Stat(publicDir); !os.IsNotExist(err) {
 		err = os.RemoveAll(publicDir)
@@ -46,17 +47,15 @@ func main() {
 		panic(err)
 	}
 
-	err = templates.IndexPage(files).Render(context.Background(), indexFile)
+	err = pages.Index(files).Render(context.Background(), indexFile)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("Generated home page:", indexFileName)
 
-	//... TODO continue
-
 	// posts
-	for _, file := range *files {
+	for _, file := range files {
 		dir := path.Join(publicDir, file.Filename)
 		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
 			panic(err)
@@ -68,7 +67,7 @@ func main() {
 			panic(err)
 		}
 
-		err = templates.PostPage(&file).Render(context.Background(), postFile)
+		err = pages.Post(file).Render(context.Background(), postFile)
 		if err != nil {
 			panic(err)
 		}
@@ -77,7 +76,7 @@ func main() {
 	}
 
 	// tags
-	tags := pkg.CollectTags()
+	tags := pkg.GetTags()
 
 	for tag, files := range tags {
 		dir := path.Join(publicDir, "tag", tag)
@@ -91,7 +90,7 @@ func main() {
 			panic(err)
 		}
 
-		err = templates.TagPage(tag, files).Render(context.Background(), tagFile)
+		err = pages.Tag(tag, files).Render(context.Background(), tagFile)
 		if err != nil {
 			panic(err)
 		}
@@ -99,13 +98,13 @@ func main() {
 		fmt.Println("Generated tag page:", tagFileName)
 	}
 
+	// TODO: categories
+
 	// static
-	err = pkg.CopyFlatDir(pkg.Config.StaticDir, "public/static")
+	err = CopyFlatDir(config.Dirs.Static, "public/static")
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println("Copied static files:", "public/static")
 
 	fmt.Println("Done")
 }

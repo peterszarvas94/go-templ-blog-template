@@ -1,23 +1,10 @@
 package pkg
 
 import (
-	"fmt"
 	"os"
 )
 
 var protectedDirs = []string{"static", "tag", "category"}
-
-type ProtectedDirError struct {
-	dirName string
-}
-
-func (e *ProtectedDirError) Error() string {
-	errorMsg := fmt.Sprintf(
-		"You can not use \"%s\" as directory name in content folder",
-		e.dirName,
-	)
-	return errorMsg
-}
 
 func CheckContentDir() error {
 	folder, err := os.Open("content")

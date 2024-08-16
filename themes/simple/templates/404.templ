@@ -1,0 +1,15 @@
+package templates
+
+templ NotFoundPage() {
+	@page(notFoundBody())
+}
+
+templ notFoundBody() {
+	<body>
+		@header()
+		<main class="page notfound-page">
+			<h1>404</h1>
+			<div>Page not found.</div>
+		</main>
+	</body>
+}

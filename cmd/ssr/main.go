@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"peterszarvas94/blog/config"
 	"peterszarvas94/blog/pkg"
 )
 
@@ -17,14 +18,14 @@ func main() {
 		panic(err)
 	}
 
-	fs := http.FileServer(http.Dir(pkg.Config.StaticDir))
+	fs := http.FileServer(http.Dir(config.Dirs.Static))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "favicon.ico")
 	})
 
-	contentHandler := &ContentHandler{}
+	contentHandler := &contentHandler{}
 	http.Handle("/{segments...}", contentHandler)
 
 	fmt.Println("Server is running on http://localhost:8080")

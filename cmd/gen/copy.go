@@ -1,6 +1,7 @@
-package pkg
+package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -39,6 +40,8 @@ func CopyFlatDir(srcDir, dstDir string) error {
 			dstPath := filepath.Join(dstDir, file.Name())
 			if err := copyFile(srcPath, dstPath); err != nil {
 				return err
+			} else {
+				fmt.Printf("Copied static file: %s\n", dstPath)
 			}
 		}
 	}
