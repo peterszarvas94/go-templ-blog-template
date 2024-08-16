@@ -16,3 +16,7 @@ time: "12:49"
   - [x] themeing support
   - [ ] cool default [theme(s)](#theme)
 - [ ] category page
+- [ ] serve/copy static but not only flat dir
+
+documents
+simple
