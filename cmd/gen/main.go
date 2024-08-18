@@ -56,7 +56,7 @@ func main() {
 
 	// posts
 	for _, file := range files {
-		dir := path.Join(publicDir, file.Filename)
+		dir := path.Join(publicDir, file.Fileroute)
 		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
 			panic(err)
 		}

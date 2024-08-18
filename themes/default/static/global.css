@@ -9,6 +9,8 @@
     --tag-bg: var(--accent);
     --tag-fg: var(--text);
     --article-bg: var(--secondary);
+    --readmore-bg: var(--primary);
+    --readmore-fg: var(--secondary);
   }
 }
 
@@ -23,6 +25,8 @@
     --tag-bg: var(--primary);
     --tag-fg: var(--text);
     --article-bg: var(--secondary);
+    --readmore-bg: var(--accent);
+    --readmore-fg: var(--secondary);
   }
 }
 
@@ -74,8 +78,28 @@ body {
       gap: 1rem;
       display: flex;
       flex-direction: column;
+      align-items: start;
       padding: 2rem;
       background: var(--article-bg);
+      border-radius: 0.5rem;
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .readmore {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+
+        a {
+          background: var(--readmore-bg);
+          color: var(--readmore-fg);
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+        }
+      }
     }
   }
 }
@@ -100,7 +124,8 @@ body {
   }
 
   .markdown-body {
-    ul {
+    ul,
+    ol {
       list-style: unset;
     }
 

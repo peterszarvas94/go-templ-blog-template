@@ -16,7 +16,7 @@ templ tagBody(tag string, files []*pkg.FileData) {
 			<h1>{ fmt.Sprintf("#%s", tag) }</h1>
 			for _, file:= range files {
 				<div>
-					<a href={ templ.SafeURL(file.Filename) }>
+					<a href={ templ.SafeURL(file.Fileroute) }>
 						{ file.Matter.Title }
 					</a>
 				</div>

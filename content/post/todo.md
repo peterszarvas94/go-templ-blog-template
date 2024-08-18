@@ -2,7 +2,7 @@
 title: "Todo"
 category: "dev"
 tags: ["dev", "todo"]
-date: "2024.08.18"
+date: "2024.08.12"
 time: "12:49"
 ---
 

@@ -5,16 +5,17 @@ import (
 	"os"
 	"path/filepath"
 	"peterszarvas94/blog/config"
+	"sort"
 	"strings"
 	"time"
 )
 
 type FileData struct {
-	Filename string
-	Matter   FrontMatter
-	DateTime time.Time
-	Html     string
-	Path     string
+	Fileroute string
+	Matter    FrontMatter
+	DateTime  time.Time
+	Html      string
+	Path      string
 }
 
 var files []*FileData
@@ -32,6 +33,10 @@ func CollectFiles() error {
 	if err != nil {
 		return err
 	}
+
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].DateTime.After(files[j].DateTime)
+	})
 
 	return nil
 }
@@ -61,37 +66,21 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 		return fmt.Errorf("failed to parse file content: %s", path)
 	}
 
-	filename := strings.TrimSuffix(path, ".md")
-	filename = strings.TrimPrefix(filename, config.Dirs.Content)
+	fileroute := strings.TrimSuffix(path, ".md")
+	fileroute = strings.TrimPrefix(fileroute, config.Dirs.Content)
 
-	parsedDate, err := time.Parse(config.DateLayout, matter.Date)
+	dateTime, err := parseDateTime(&matter)
 	if err != nil {
-		return fmt.Errorf("failed to parse date: %s", matter.Date)
+		return fmt.Errorf("failed to parse date time: %s", path)
 	}
-
-	parseTime, err := time.Parse(config.TimeLayout, matter.Time)
-	if err != nil {
-		return fmt.Errorf("failed to parse time: %s", matter.Time)
-	}
-
-	dateTime := time.Date(
-		parsedDate.Year(),
-		parsedDate.Month(),
-		parsedDate.Day(),
-		parseTime.Hour(),
-		parseTime.Minute(),
-		parseTime.Second(),
-		0,
-		time.Local,
-	)
 
 	// Get the first part (before the dot)
 	file := &FileData{
-		Filename: filename,
-		Matter:   matter,
-		DateTime: dateTime, // TODO
-		Html:     html,
-		Path:     path,
+		Fileroute: fileroute,
+		Matter:    matter,
+		DateTime:  dateTime, // TODO
+		Html:      html,
+		Path:      path,
 	}
 	files = append(files, file)
 

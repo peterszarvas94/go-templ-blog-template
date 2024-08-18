@@ -67,4 +67,4 @@ type (
 When running the following command, the files from the theme folder gets copied
 over the appropriate directories:
 
-- `make theme name=mytheme`
+`make theme name=mytheme`

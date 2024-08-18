@@ -2,7 +2,9 @@ package pkg
 
 import (
 	"bytes"
+	"peterszarvas94/blog/config"
 	"strings"
+	"time"
 
 	"github.com/adrg/frontmatter"
 	"github.com/yuin/goldmark"
@@ -49,4 +51,29 @@ func parseFileContent(input string) (string, error) {
 	}
 
 	return buf.String(), nil
+}
+
+func parseDateTime(matter *FrontMatter) (time.Time, error) {
+	parsedDate, err := time.Parse(config.DateLayout, matter.Date)
+	if err != nil {
+		return time.Now(), err
+	}
+
+	parseTime, err := time.Parse(config.TimeLayout, matter.Time)
+	if err != nil {
+		return time.Now(), err
+	}
+
+	dateTime := time.Date(
+		parsedDate.Year(),
+		parsedDate.Month(),
+		parsedDate.Day(),
+		parseTime.Hour(),
+		parseTime.Minute(),
+		parseTime.Second(),
+		0,
+		time.Local,
+	)
+
+	return dateTime, nil
 }
