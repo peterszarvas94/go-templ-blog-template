@@ -16,6 +16,12 @@ type contentHandler struct{}
 
 func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// TODO: assert CheckContentDir has run
+
+	// TODO: only for dev
+	r.Header.Set("Cache-Control", "no-store, no-cache, must-revalidate")
+	r.Header.Set("Pragma", "no-cache")
+	r.Header.Set("Expires", "0")
+
 	url := r.URL.Path
 
 	if url == "/" {

@@ -1,7 +1,13 @@
 package templates
 
+import (
+	"peterszarvas94/blog/config"
+)
+
 templ header() {
 	<header>
-		<a href="/">BLOG</a>
+		<div>
+			<a href="/">{ config.Title }</a>
+		</div>
 	</header>
 }

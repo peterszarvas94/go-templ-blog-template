@@ -3,6 +3,7 @@ package templates
 import (
 	"peterszarvas94/blog/pkg"
 	"fmt"
+	"peterszarvas94/blog/config"
 )
 
 templ PostPage(post *pkg.FileData) {
@@ -14,9 +15,8 @@ templ postBody(post *pkg.FileData) {
 		@header()
 		<main class="page post-page">
 			<h1>{ post.Matter.Title }</h1>
-			<time>{ post.Date.Format("2006-01-02 15:04") }</time>
+			<time>{ post.DateTime.Format(fmt.Sprintf("%s %s", config.DateLayout, config.TimeLayout)) }</time>
 			<div class="tags">
-				<div>[</div>
 				<ul>
 					for _, tag := range post.Matter.Tags {
 						<li>
@@ -26,7 +26,6 @@ templ postBody(post *pkg.FileData) {
 						</li>
 					}
 				</ul>
-				<div>]</div>
 			</div>
 			<article class="markdown-body">
 				@pkg.HtmlString(post.Html)

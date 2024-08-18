@@ -12,14 +12,18 @@ templ indexBody(files []*pkg.FileData) {
 	<body>
 		@header()
 		<main class="page index-page">
-			<h1>Articles</h1>
-			for _, file:= range files {
-				<div>
-					<a href={ templ.SafeURL(file.Filename) }>
-						{ file.Matter.Title }
-					</a>
-				</div>
-			}
+			<ul class="articles">
+				for _, file:= range files {
+					<li>
+						<a href={ templ.SafeURL(file.Filename) }>
+							{ file.Matter.Title }
+						</a>
+						<div>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</div>
+					</li>
+				}
+			</ul>
 		</main>
 	</body>
 }

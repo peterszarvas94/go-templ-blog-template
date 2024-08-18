@@ -11,3 +11,8 @@ var Dirs = &dirConfig{
 	Public:  "public",
 	Static:  "static",
 }
+
+var Title = "gossg"
+
+var DateLayout = "2006.01.02"
+var TimeLayout = "15:04"

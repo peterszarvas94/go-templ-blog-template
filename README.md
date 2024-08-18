@@ -1,4 +1,4 @@
-# GO blog template
+# gossg
 
 ## Goals
 

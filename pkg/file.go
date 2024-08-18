@@ -12,7 +12,7 @@ import (
 type FileData struct {
 	Filename string
 	Matter   FrontMatter
-	Date     time.Time
+	DateTime time.Time
 	Html     string
 	Path     string
 }
@@ -64,11 +64,32 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	filename := strings.TrimSuffix(path, ".md")
 	filename = strings.TrimPrefix(filename, config.Dirs.Content)
 
+	parsedDate, err := time.Parse(config.DateLayout, matter.Date)
+	if err != nil {
+		return fmt.Errorf("failed to parse date: %s", matter.Date)
+	}
+
+	parseTime, err := time.Parse(config.TimeLayout, matter.Time)
+	if err != nil {
+		return fmt.Errorf("failed to parse time: %s", matter.Time)
+	}
+
+	dateTime := time.Date(
+		parsedDate.Year(),
+		parsedDate.Month(),
+		parsedDate.Day(),
+		parseTime.Hour(),
+		parseTime.Minute(),
+		parseTime.Second(),
+		0,
+		time.Local,
+	)
+
 	// Get the first part (before the dot)
 	file := &FileData{
 		Filename: filename,
 		Matter:   matter,
-		Date:     time.Now(), // TODO
+		DateTime: dateTime, // TODO
 		Html:     html,
 		Path:     path,
 	}

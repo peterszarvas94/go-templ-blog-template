@@ -1,7 +1,8 @@
 ---
 title: "Todo"
 category: "dev"
-tags: ["may", "day", "test"]
+tags: ["dev", "todo"]
+date: "2024.08.18"
 time: "12:49"
 ---
 
@@ -17,6 +18,4 @@ time: "12:49"
   - [ ] cool default [theme(s)](#theme)
 - [ ] category page
 - [ ] serve/copy static but not only flat dir
-
-documents
-simple
+- [ ] make content excrept (get first p -> get 120 chars)

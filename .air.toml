@@ -3,10 +3,10 @@ tmp_dir = "bin"
 
 [build]
   bin = "./bin/ssr"
-  cmd = "go build -o ./bin/ssr ./cmd/ssr"
+  cmd = "make theme name=default && go build -o ./bin/ssr ./cmd/ssr"
   delay = 100
-  exclude_dir = ["bin"]
-  include_ext = ["go", "md"]
+  exclude_dir = ["bin", "static"]
+  include_ext = ["go", "md", "css"]
   stop_on_error = false
 
 [log]

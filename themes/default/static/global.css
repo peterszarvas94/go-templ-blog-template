@@ -1,38 +1,45 @@
 @media (prefers-color-scheme: light) {
   :root {
-    --text: #050316;
-    --background: #fbfbfe;
-    --primary: #2f27ce;
-    --secondary: #dddbff;
-    --accent: #443dff;
-    --logo: #fbfbfe;
+    --text: #000000;
+    --background: #ffffff;
+    --primary: #4a49f5;
+    --secondary: #f0f0f0;
+    --accent: #ffb347;
+    --logo-fg: var(--primary);
+    --tag-bg: var(--accent);
+    --tag-fg: var(--text);
+    --article-bg: var(--secondary);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #eae9fc;
-    --background: #010104;
+    --text: #ffffff;
+    --background: #252525;
     --primary: #3a31d8;
-    --secondary: #020024;
-    --accent: #0600c2;
-    --logo: #eae9fc;
+    --secondary: #424242;
+    --accent: #ffcb71;
+    --logo-fg: var(--accent);
+    --tag-bg: var(--primary);
+    --tag-fg: var(--text);
+    --article-bg: var(--secondary);
   }
 }
 
-ul {
-  list-style: unset;
-}
-
 header {
-  background-color: var(--accent);
+  div {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0;
 
-  a {
-    font-weight: bold;
-    text-decoration: none;
-    color: var(--logo);
-    font-size: 2rem;
-    padding: 1rem;
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 2rem;
+      padding: 1rem;
+      color: var(--logo-fg);
+    }
   }
 }
 
@@ -53,6 +60,26 @@ body {
   }
 }
 
+.index-page {
+  .articles {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0;
+
+    li {
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      background: var(--article-bg);
+    }
+  }
+}
+
 .post-page {
   .tags {
     display: flex;
@@ -61,15 +88,22 @@ body {
     ul {
       display: flex;
       gap: 0.5rem;
-      list-style: none;
-    }
+      padding: 0.5rem;
 
-    a {
-      text-decoration: underline;
+      li {
+        background: var(--tag-bg);
+        color: var(--tag-fg);
+        padding: 0 0.5rem;
+        border-radius: 0.5rem;
+      }
     }
   }
 
   .markdown-body {
+    ul {
+      list-style: unset;
+    }
+
     max-width: 1200px;
     padding: 4rem 0;
   }

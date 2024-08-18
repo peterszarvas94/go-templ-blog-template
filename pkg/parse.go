@@ -15,6 +15,7 @@ type FrontMatter struct {
 	Title    string   `yaml:"title"`
 	Category string   `yaml:"category"`
 	Tags     []string `yaml:"tags"`
+	Date     string   `yaml:"date"`
 	Time     string   `yaml:"time"`
 }
 
