@@ -2,12 +2,33 @@ package templates
 
 templ head() {
 	<head>
+		<title>Lytepage</title>
+		<!--
+		meta
+		!-->
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta
+			name="description"
+			content="Lite yet powerful static side generator, using the power of go and templ"
+		/>
+		<meta name="keywords" content="go, templ, ssg, lytepage, static"/>
+		<meta name="author" content="Péter Szarvas"/>
+		<!--
+		css reset: tailwindcss's preflight
+		https://github.com/tailwindlabs/tailwindcss/blob/3df38a7458cc2bc16eebc316e43f05db3c5d175b/packages/tailwindcss/preflight.css#L4
+		-->
 		<link rel="stylesheet" href="/static/preflight.css"/>
-		<link rel="stylesheet" href="/static/global.css"/>
-		<!-- https://github.com/sindresorhus/github-markdown-css -->
+		<!--
+		github markdown css
+		https://github.com/sindresorhus/github-markdown-css
+		-->
 		<link rel="stylesheet" href="/static/markdown-light.css"/>
 		<link rel="stylesheet" href="/static/markdown-dark.css"/>
-		<!-- https://github.com/highlightjs/highlight.js -->
+		<!--
+		code syntaxt highlighting: highlight.js 
+		https://github.com/highlightjs/highlight.js
+		-->
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"
@@ -19,6 +40,10 @@ templ head() {
 			media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
 		/>
 		<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+		<!--
+		custom styles
+		-->
+		<link rel="stylesheet" href="/static/global.css"/>
 		<script>hljs.highlightAll();</script>
 	</head>
 }

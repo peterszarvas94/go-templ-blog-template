@@ -1,10 +1,12 @@
 ---
-title: "What is gossg?"
-category: "dev"
-tags: ["dev", "home"]
+title: "Introduction"
+category: "docs"
+tags: ["intro", "docs"]
 date: "2024.08.20"
-time: "12:49"
+time: "11:15"
 ---
+
+Lite yet powerful static side generator, using the power of go and templ.
 
 ## Goals
 

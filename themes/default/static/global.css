@@ -11,6 +11,7 @@
     --article-bg: var(--secondary);
     --readmore-bg: var(--primary);
     --readmore-fg: var(--secondary);
+    --link-fg: var(--primary);
   }
 }
 
@@ -27,6 +28,7 @@
     --article-bg: var(--secondary);
     --readmore-bg: var(--accent);
     --readmore-fg: var(--secondary);
+    --link-fg: var(--accent);
   }
 }
 
@@ -56,6 +58,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 1rem;
 
   h1 {
     font-size: 2rem;
@@ -124,12 +127,16 @@ body {
   }
 
   .markdown-body {
+    max-width: 1200px;
+    padding: 4rem 0;
+
     ul,
     ol {
       list-style: unset;
     }
 
-    max-width: 1200px;
-    padding: 4rem 0;
+    a {
+      color: var(--link-fg);
+    }
   }
 }

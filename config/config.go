@@ -12,8 +12,8 @@ var Dirs = &dirConfig{
 	Static:  "static",
 }
 
-var Title = "gossg"
-var IndexTitle = "Quick Start"
+var Title = "lytepage"
+var IndexTitle = "Lyte ssg, with the power of go + templ"
 
 var DateLayout = "2006.01.02"
 var TimeLayout = "15:04"
