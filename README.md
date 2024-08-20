@@ -25,13 +25,17 @@
 ### SSR (Server Side Rendering) mode
 
 - `make build`: build go binary
-- `make ssr`: run go server
+- `make ssr`: start server
 
 ### SSG (Static Site Generation) mode
 
-- `make gen`: generate static HTML files
-- `make ssg`: start prod server [http://localhost:8080](http://localhost:8080)
-  (SSG mode)
+- `make gen`: generate static files
+
+You can put these static files to any server. You can serve them with `go` as
+well:
+
+- `make ssg`: start static file server
+  [http://localhost:8080](http://localhost:8080)
 
 ## Themes
 

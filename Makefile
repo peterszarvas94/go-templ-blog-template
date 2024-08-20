@@ -9,6 +9,7 @@ dev:
 # ssr mode:
 
 build:
+	templ generate
 	go build -o ./bin/ssr ./cmd/ssr
 
 ssr:
@@ -17,6 +18,7 @@ ssr:
 # ssg mode:
 
 gen:
+	templ generate
 	go run ./cmd/gen
 
 ssg:
