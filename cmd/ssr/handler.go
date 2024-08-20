@@ -33,17 +33,24 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if strings.HasPrefix(url, "/tag") {
 		tag := path.Base(url)
-		fmt.Println("tag", tag)
 
 		tags := pkg.GetTags()
 		files := tags[tag]
+
 		handler := templ.Handler(pages.Tag(tag, files))
 		handler.ServeHTTP(w, r)
 		return
 	}
 
 	if strings.HasPrefix(url, "/category") {
-		// TODO: category
+		category := path.Base(url)
+
+		categories := pkg.GetCategories()
+		files := categories[category]
+
+		handler := templ.Handler(pages.Category(category, files))
+		handler.ServeHTTP(w, r)
+		return
 	}
 
 	pathToFile := path.Join(config.Dirs.Content, url)

@@ -33,20 +33,24 @@ Lite yet powerful static side generator, using the power of go and templ.
 ### SSR (Server Side Rendering) mode
 
 - `make build`: build go binary
-- `make ssr`: run go server
+- `make ssr`: start server
 
 ### SSG (Static Site Generation) mode
 
-- `make gen`: generate static HTML files
-- `make ssg`: start prod server [http://localhost:8080](http://localhost:8080)
-  (SSG mode)
+- `make gen`: generate static files
+
+You can put these static files to any server. You can serve them with `go` as
+well:
+
+- `make ssg`: start static file server
+  [http://localhost:8080](http://localhost:8080)
 
 ## Themes
 
 You can add a new theme under `themes/mytheme/` (replace `mytheme` with the name
 of the theme), whith the following structure:
 
-```
+```txt
 themes
 └── mytheme
     ├── static

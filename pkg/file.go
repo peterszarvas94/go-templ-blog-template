@@ -78,7 +78,7 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	file := &FileData{
 		Fileroute: fileroute,
 		Matter:    matter,
-		DateTime:  dateTime, // TODO
+		DateTime:  dateTime,
 		Html:      html,
 		Path:      path,
 	}
@@ -108,4 +108,12 @@ func GetTags() map[string][]*FileData {
 	}
 
 	return tags
+}
+
+func GetCategories() map[string][]*FileData {
+	categories := make(map[string][]*FileData)
+	for _, file := range files {
+		categories[file.Matter.Category] = append(categories[file.Matter.Category], file)
+	}
+	return categories
 }

@@ -98,7 +98,28 @@ func main() {
 		fmt.Println("Generated tag page:", tagFileName)
 	}
 
-	// TODO: categories
+	// categories
+	category := pkg.GetCategories()
+
+	for category, files := range category {
+		dir := path.Join(publicDir, "category", category)
+		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
+			panic(err)
+		}
+
+		categoryFileName := path.Join(dir, "index.html")
+		categoryFile, err := os.Create(categoryFileName)
+		if err != nil {
+			panic(err)
+		}
+
+		err = pages.Category(category, files).Render(context.Background(), categoryFile)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println("Generated category page:", categoryFileName)
+	}
 
 	// static
 	err = CopyFlatDir(config.Dirs.Static, "public/static")

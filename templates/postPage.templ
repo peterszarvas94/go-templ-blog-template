@@ -16,12 +16,13 @@ templ postBody(post *pkg.FileData) {
 		<main class="page post-page">
 			<h1>{ post.Matter.Title }</h1>
 			<time>{ post.DateTime.Format(fmt.Sprintf("%s %s", config.DateLayout, config.TimeLayout)) }</time>
+			@category(post.Matter.Category)
 			<div class="tags">
 				<ul>
 					for _, tag := range post.Matter.Tags {
 						<li>
 							<a href={ templ.SafeURL(fmt.Sprintf("/tag/%s", tag)) }>
-								{ tag }
+								{ fmt.Sprintf("# %s", tag) }
 							</a>
 						</li>
 					}

@@ -1,7 +1,6 @@
 package templates
 
 import (
-	"fmt"
 	"peterszarvas94/blog/pkg"
 )
 
@@ -13,7 +12,11 @@ templ categoryBody(category string, files []*pkg.FileData) {
 	<body>
 		@header()
 		<main class="page category-page">
-			<h1>{ fmt.Sprintf("#%s", category) }</h1>
+			<h1>
+				@categoryIcon()
+				<div>category /</div>
+				<div>{ category }</div>
+			</h1>
 			for _, file:= range files {
 				<div>
 					<a href={ templ.SafeURL(file.Fileroute) }>

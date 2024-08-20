@@ -6,6 +6,7 @@
     --secondary: #f0f0f0;
     --accent: #ffb347;
     --logo-fg: var(--primary);
+    --category-fg: var(--primary);
     --tag-bg: var(--accent);
     --tag-fg: var(--text);
     --article-bg: var(--secondary);
@@ -23,6 +24,7 @@
     --secondary: #424242;
     --accent: #ffcb71;
     --logo-fg: var(--accent);
+    --category-fg: var(--accent);
     --tag-bg: var(--primary);
     --tag-fg: var(--text);
     --article-bg: var(--secondary);
@@ -108,9 +110,25 @@ body {
 }
 
 .post-page {
-  .tags {
+  .category {
+    padding-top: 0.5rem;
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.1rem;
+    color: var(--category-fg);
+
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .tags {
+    padding-top: 0.5rem;
 
     ul {
       display: flex;
@@ -138,5 +156,26 @@ body {
     a {
       color: var(--link-fg);
     }
+  }
+}
+
+.category-page {
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}
+
+.tag-page {
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }

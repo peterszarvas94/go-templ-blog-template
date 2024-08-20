@@ -42,7 +42,7 @@ well:
 You can add a new theme under `themes/mytheme/` (replace `mytheme` with the name
 of the theme), whith the following structure:
 
-```
+```txt
 themes
 └── mytheme
     ├── static
