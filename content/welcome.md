@@ -2,11 +2,11 @@
 title: "Introduction"
 category: "docs"
 tags: ["intro", "docs"]
-date: "2024.08.20"
+date: "2024.08.12"
 time: "11:15"
+excerpt:
+  "Lite yet powerful static side generator, using the power of go and templ"
 ---
-
-Lite yet powerful static side generator, using the power of go and templ.
 
 ## Goals
 

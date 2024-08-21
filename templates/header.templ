@@ -8,6 +8,12 @@ templ header() {
 	<header>
 		<div>
 			<a href="/">{ config.Title }</a>
+			<form action="/search" method="get">
+				<input type="text" name="q" placeholder="Search..." required/>
+				<button type="submit">
+					@searchIcon()
+				</button>
+			</form>
 		</div>
 	</header>
 }

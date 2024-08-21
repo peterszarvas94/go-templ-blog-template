@@ -53,6 +53,12 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if strings.HasPrefix(url, "/search") {
+		handler := templ.Handler(pages.Search())
+		handler.ServeHTTP(w, r)
+		return
+	}
+
 	pathToFile := path.Join(config.Dirs.Content, url)
 
 	pathToFileWithExtension := fmt.Sprintf("%s.md", pathToFile)

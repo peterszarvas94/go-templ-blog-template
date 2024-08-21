@@ -5,7 +5,8 @@ import (
 )
 
 templ CategoryPage(category string, files []*pkg.FileData) {
-	@page(categoryBody(category, files))
+	@head()
+	@categoryBody(category, files)
 }
 
 templ categoryBody(category string, files []*pkg.FileData) {

@@ -11,11 +11,12 @@ import (
 )
 
 type FileData struct {
-	Fileroute string
-	Matter    FrontMatter
-	DateTime  time.Time
-	Html      string
-	Path      string
+	Fileroute string      `json:"fileroute"`
+	Matter    FrontMatter `json:"matter"`
+	DateTime  time.Time   `json:"datetime"`
+	Html      string      `json:"html"`
+	Content   string      `json:"content"`
+	Path      string      `json:"path"`
 }
 
 var files []*FileData
@@ -74,12 +75,15 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 		return fmt.Errorf("failed to parse date time: %s", path)
 	}
 
+	content := StripHTMLTags(html)
+
 	// Get the first part (before the dot)
 	file := &FileData{
 		Fileroute: fileroute,
 		Matter:    matter,
 		DateTime:  dateTime,
 		Html:      html,
+		Content:   content,
 		Path:      path,
 	}
 	files = append(files, file)

@@ -7,7 +7,8 @@ import (
 )
 
 templ PostPage(post *pkg.FileData) {
-	@page(postBody(post))
+	@head()
+	@postBody(post)
 }
 
 templ postBody(post *pkg.FileData) {

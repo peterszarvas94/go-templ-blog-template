@@ -4,20 +4,10 @@ import (
 	"fmt"
 	"net/http"
 	"peterszarvas94/blog/config"
-	"peterszarvas94/blog/pkg"
+	_ "peterszarvas94/blog/pkg"
 )
 
 func main() {
-	err := pkg.CheckContentDir()
-	if err != nil {
-		panic(err)
-	}
-
-	err = pkg.CollectFiles()
-	if err != nil {
-		panic(err)
-	}
-
 	fs := http.FileServer(http.Dir(config.Dirs.Static))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 

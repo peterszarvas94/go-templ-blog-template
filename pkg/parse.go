@@ -19,6 +19,7 @@ type FrontMatter struct {
 	Tags     []string `yaml:"tags"`
 	Date     string   `yaml:"date"`
 	Time     string   `yaml:"time"`
+	Excerpt  string   `yaml:"excerpt"`
 }
 
 func parseFrontMatter(input string) (FrontMatter, string, error) {

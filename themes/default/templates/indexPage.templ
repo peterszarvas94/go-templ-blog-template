@@ -6,7 +6,8 @@ import (
 )
 
 templ IndexPage(files []*pkg.FileData) {
-	@page(indexBody(files))
+	@head()
+	@indexBody(files)
 }
 
 templ indexBody(files []*pkg.FileData) {
@@ -23,7 +24,7 @@ templ indexBody(files []*pkg.FileData) {
 							</a>
 						</h2>
 						<div>
-							{ pkg.StripHTMLTags(file.Html) }
+							{ file.Matter.Excerpt }
 						</div>
 						<div class="readmore">
 							<a href={ templ.SafeURL(file.Fileroute) }>

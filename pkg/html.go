@@ -33,11 +33,6 @@ func StripHTMLTags(input string) string {
 		}
 	}
 
-	if len(output) > 120 {
-		excerpt := fmt.Sprintf("%s...", output[:120])
-		return excerpt
-	}
-
 	return output
 }
 

@@ -11,16 +11,6 @@ import (
 )
 
 func main() {
-	err := pkg.CheckContentDir()
-	if err != nil {
-		panic(err)
-	}
-
-	err = pkg.CollectFiles()
-	if err != nil {
-		panic(err)
-	}
-
 	publicDir := config.Dirs.Public
 
 	if _, err := os.Stat(publicDir); !os.IsNotExist(err) {
@@ -31,7 +21,7 @@ func main() {
 		fmt.Println("Removed existing directory: ", publicDir)
 	}
 
-	err = os.Mkdir(publicDir, 0755)
+	err := os.Mkdir(publicDir, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -120,6 +110,25 @@ func main() {
 
 		fmt.Println("Generated category page:", categoryFileName)
 	}
+
+	// search
+	dir := path.Join(publicDir, "search")
+	if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
+		panic(err)
+	}
+
+	searchFileName := path.Join(dir, "index.html")
+	searchFile, err := os.Create(searchFileName)
+	if err != nil {
+		panic(err)
+	}
+
+	err = pages.Search().Render(context.Background(), searchFile)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Generated search page:", searchFileName)
 
 	// static
 	err = CopyFlatDir(config.Dirs.Static, "public/static")

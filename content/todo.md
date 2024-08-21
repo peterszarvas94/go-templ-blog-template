@@ -2,8 +2,9 @@
 title: "TODO"
 category: "development"
 tags: ["todo", "test"]
-date: "2024.08.20"
+date: "2024.08.11"
 time: "11:14"
+excerpt: "Way to prod"
 ---
 
 ## P1

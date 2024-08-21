@@ -13,7 +13,7 @@ var Dirs = &dirConfig{
 }
 
 var Title = "lytepage"
-var IndexTitle = "Lyte ssg, with the power of go + templ"
+var IndexTitle = "Lite ssg with the power of go + templ"
 
 var DateLayout = "2006.01.02"
 var TimeLayout = "15:04"

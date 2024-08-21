@@ -5,7 +5,8 @@ import (
 )
 
 templ TagPage(tag string, files []*pkg.FileData) {
-	@page(tagBody(tag, files))
+	@head()
+	@tagBody(tag, files)
 }
 
 templ tagBody(tag string, files []*pkg.FileData) {

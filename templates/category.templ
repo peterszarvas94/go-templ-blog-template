@@ -5,10 +5,8 @@ import (
 )
 
 templ category(name string) {
-	<div class="category">
+	<a href={ templ.SafeURL(fmt.Sprintf("/category/%s", name)) } class="category">
 		@categoryIcon()
-		<a href={ templ.SafeURL(fmt.Sprintf("/category/%s", name)) }>
-			{ name }
-		</a>
-	</div>
+		<div>{ name }</div>
+	</a>
 }

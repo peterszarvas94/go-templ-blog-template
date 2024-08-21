@@ -29,6 +29,7 @@ ssg:
 
 theme:
 	@if [ -d "themes/$(name)/static" ]; then \
+		rm -rf static/*; \
 		cp -r themes/$(name)/static/* static; \
 		cp themes/$(name)/templates/*.templ templates 2>/dev/null || true; \
 		echo "Theme '$(name)' applied."; \
