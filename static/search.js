@@ -1,9 +1,15 @@
+/**
+  * Client side search with MiniSearch
+  */
+
+// get the JSON file and parse it
 const response = await fetch("/static/files.json");
 if (!response.ok) {
   throw new Error(`Failed to load JSON: ${response.status}`);
 }
 const files = await response.json();
 
+// init search
 const miniSearch = new MiniSearch({
   fields: ["title", "excerpt", "content", "route"], // fields to index for full-text search
   storeFields: ["title", "excerpt", "content", "route"], // fields to return with search results
@@ -11,19 +17,27 @@ const miniSearch = new MiniSearch({
 
 miniSearch.addAll(files);
 
+// define search function
 function search(query) {
   const result = miniSearch.search(query);
-  console.log(result);
   return result;
 }
 
+// get search query
 const url = new URL(window.location.href);
 const searchParams = new URLSearchParams(url.search);
 const q = searchParams.get("q");
 
+// set search input value for visual feedback
+const form = document.querySelector("#search-form");
+const input = form.querySelector("input[name=q]");
+input.value = q;
+
+// run search
 const result = search(q || "");
 
-const searchTarget = document.getElementById("search-result");
+// render search results
+const searchTarget = document.querySelector(".article-list");
 
 for (const file of result) {
   const a = document.createElement("a");

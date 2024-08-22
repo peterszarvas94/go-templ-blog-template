@@ -2,6 +2,7 @@ package templates
 
 import (
 	"peterszarvas94/blog/pkg"
+	"fmt"
 )
 
 templ TagPage(tag string, files []*pkg.FileData) {
@@ -14,17 +15,9 @@ templ tagBody(tag string, files []*pkg.FileData) {
 		@header()
 		<main class="page tag-page">
 			<h1>
-				<div>#</div>
-				<div>tag /</div>
-				<div>{ tag }</div>
+				<div>{ fmt.Sprintf("# %s", tag) }</div>
 			</h1>
-			for _, file:= range files {
-				<div>
-					<a href={ templ.SafeURL(file.Fileroute) }>
-						{ file.Matter.Title }
-					</a>
-				</div>
-			}
+			@articleList(files)
 		</main>
 		@footer()
 	</body>

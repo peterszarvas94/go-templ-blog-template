@@ -17,7 +17,7 @@
     "id": 2,
     "title": "About me",
     "excerpt": "",
-    "content": "Hi I am Péter, check out my other works:\n\nportfolio\ngithub\n\n",
+    "content": "Hi there\nMy name is Péter Szarvas, I work as a freelancer, as a fullstack developer in\nHungray. First I stared out wirh JavaScript/TypeScript and frontend frameworks\nlike React, Astro, I have built some projects with this stack. But over time my\ninterest is shifted to Go, and server driven, traditional server-client\napplications. This interest led me to build Lytepage, as an alternative to\nclient-side frameworks, to have a simple tool to build static sites.\nContact\n\nphone\nemail\nwebsite\ngithub\nlinkedin\n\n",
     "route": "/author"
   }
 ]

@@ -15,25 +15,7 @@ templ indexBody(files []*pkg.FileData) {
 		@header()
 		<main class="page index-page">
 			<h1>{ config.IndexTitle }</h1>
-			<ul class="articles">
-				for _, file:= range files {
-					<li>
-						<h2>
-							<a href={ templ.SafeURL(file.Fileroute) }>
-								{ file.Matter.Title }
-							</a>
-						</h2>
-						<div>
-							{ file.Matter.Excerpt }
-						</div>
-						<div class="readmore">
-							<a href={ templ.SafeURL(file.Fileroute) }>
-								Read more
-							</a>
-						</div>
-					</li>
-				}
-			</ul>
+			@articleList(files)
 		</main>
 		@footer()
 	</body>

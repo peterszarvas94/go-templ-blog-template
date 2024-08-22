@@ -36,8 +36,14 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		tags := pkg.GetTags()
 		files := tags[tag]
+		fmt.Println(files)
 
-		handler := templ.Handler(pages.Tag(tag, files))
+		handler := templ.Handler(pages.NotFound())
+
+		if len(files) > 0 {
+			handler = templ.Handler(pages.Tag(tag, files))
+		}
+
 		handler.ServeHTTP(w, r)
 		return
 	}

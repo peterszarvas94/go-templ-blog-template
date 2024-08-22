@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-category: "docs"
+category: "about"
 tags: ["intro", "docs"]
 date: "2024.08.12"
 time: "11:15"

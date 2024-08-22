@@ -15,16 +15,9 @@ templ categoryBody(category string, files []*pkg.FileData) {
 		<main class="page category-page">
 			<h1>
 				@categoryIcon()
-				<div>category /</div>
 				<div>{ category }</div>
 			</h1>
-			for _, file:= range files {
-				<div>
-					<a href={ templ.SafeURL(file.Fileroute) }>
-						{ file.Matter.Title }
-					</a>
-				</div>
-			}
+			@articleList(files)
 		</main>
 		@footer()
 	</body>

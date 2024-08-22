@@ -2,21 +2,26 @@ package pkg
 
 import "fmt"
 
-type ProtectedDirError struct {
-	dirName string
+type ProtectedNameError struct {
+	name string
+	kind string
 }
 
-func (e *ProtectedDirError) Error() string {
+func (e *ProtectedNameError) Error() string {
 	return fmt.Sprintf(
-		"You can not use \"%s\" as directory name in content folder",
-		e.dirName,
+		"You can not use \"%s\" as %sname in content folder",
+		e.name,
+		e.kind,
 	)
 }
 
-type FileNotFoundError struct {
-	message string
-}
-
-func (e FileNotFoundError) Error() string {
-	return e.message
-}
+// type FileNotFoundError struct {
+// 	fileName string
+// }
+//
+// func (e *FileNotFoundError) Error() string {
+// 	return fmt.Sprintf(
+// 		"File \"%s\" not found",
+// 		e.fileName,
+// 	)
+// }

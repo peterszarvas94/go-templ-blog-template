@@ -1,5 +1,7 @@
 package templates
 
+import "peterszarvas94/blog/pkg"
+
 templ SearchPage() {
 	@head() {
 		<script src="/static/search.js" type="module"></script>
@@ -8,12 +10,14 @@ templ SearchPage() {
 	@searchBody()
 }
 
+var emptyList = []*pkg.FileData{}
+
 templ searchBody() {
 	<body>
 		@header()
 		<main class="page search-page">
 			<h1>Search</h1>
-			<ul id="search-result" class="articles"></ul>
+			@articleList(emptyList)
 		</main>
 		@footer()
 	</body>
