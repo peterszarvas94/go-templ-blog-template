@@ -24,7 +24,7 @@ func copyFile(srcPath, dstPath string) error {
 	return err
 }
 
-func CopyFlatDir(srcDir, dstDir string) error {
+func CopyDir(srcDir, dstDir string) error {
 	files, err := os.ReadDir(srcDir)
 	if err != nil {
 		return err
