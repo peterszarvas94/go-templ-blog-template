@@ -1,68 +1,87 @@
 /**
-  * Client side search with MiniSearch
-  */
+ * Client side search with MiniSearch
+ */
 
-// get the JSON file and parse it
-const response = await fetch("/static/files.json");
-if (!response.ok) {
-  throw new Error(`Failed to load JSON: ${response.status}`);
+(async function main() {
+  const files = await getFiles();
+  const miniSearch = getMiniSearch(files);
+  const query = getQuery();
+  if (!query) {
+    return;
+  }
+
+  const results = search(query, miniSearch);
+
+  const input = getInput();
+  input.value = query;
+
+  const routes = getRoutes(results);
+  const articles = getArticles();
+  filterArticles(articles, routes);
+})();
+
+async function getFiles() {
+  const response = await fetch("/static/files.json");
+  if (!response.ok) {
+    throw new Error(`Failed to load JSON: ${response.status}`);
+  }
+  return await response.json();
 }
-const files = await response.json();
+const files = await getFiles();
 
-// init search
-const miniSearch = new MiniSearch({
-  fields: ["title", "excerpt", "content", "route"], // fields to index for full-text search
-  storeFields: ["title", "excerpt", "content", "route"], // fields to return with search results
-});
+function getMiniSearch(files) {
+  const miniSearch = new MiniSearch({
+    fields: ["title", "excerpt", "content", "route"], // fields to index for full-text search
+    storeFields: ["title", "excerpt", "content", "route"], // fields to return with search results
+  });
 
-miniSearch.addAll(files);
+  miniSearch.addAll(files);
+  return miniSearch;
+}
 
-// define search function
-function search(query) {
+function search(query, miniSearch) {
   const result = miniSearch.search(query);
   return result;
 }
 
-// get search query
-const url = new URL(window.location.href);
-const searchParams = new URLSearchParams(url.search);
-const q = searchParams.get("q");
+function getQuery() {
+  const url = new URL(window.location.href);
+  const searchParams = new URLSearchParams(url.search);
+  const query = searchParams.get("search");
+  return query;
+}
 
-// set search input value for visual feedback
-const form = document.querySelector("#search-form");
-const input = form.querySelector("input[name=q]");
-input.value = q;
+function getInput() {
+  const form = document.querySelector("#search-form");
+  const input = form.querySelector("input[name=search]");
+  return input;
+}
+// input.value = getQuery(); // ?
 
-// run search
-const result = search(q || "");
+function getRoutes(results) {
+  const routes = results.map((result) => result.route);
+  return routes;
+}
 
-// render search results
-const searchTarget = document.querySelector(".article-list");
+function getArticles() {
+  const articles = document.querySelectorAll(".article-list li");
+  const arr = Array.from(articles);
+  return arr;
+}
 
-for (const file of result) {
-  const a = document.createElement("a");
-  a.href = file.route;
-  a.textContent = file.title;
-
-  const h2 = document.createElement("h2");
-  h2.appendChild(a);
-
-  const li = document.createElement("li");
-  li.appendChild(h2);
-
-  const div1 = document.createElement("div");
-  div1.textContent = file.excerpt;
-
-  const a2 = document.createElement("a");
-  a2.href = file.route;
-  a2.textContent = "Read more";
-
-  const div2 = document.createElement("div");
-  div2.appendChild(a2);
-  div2.classList.add("readmore");
-
-  li.appendChild(div1);
-  li.appendChild(div2);
-
-  searchTarget.appendChild(li);
+function filterArticles(articles, routes) {
+  articles
+    .filter((atricle) => {
+      const href = atricle.querySelector("a")?.href || "";
+      const url = new URL(href);
+      const pathname = url.pathname;
+      if (routes.includes(pathname)) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .forEach((atricle) => {
+      atricle.style.display = "none";
+    });
 }

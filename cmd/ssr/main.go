@@ -15,6 +15,15 @@ func main() {
 		http.ServeFile(w, r, "favicon.ico")
 	})
 
+	indexHandler := &indexHandler{}
+	http.Handle("/{$}", indexHandler)
+
+	categoryHandler := &categoryHandler{}
+	http.Handle("/category/{category}/{$}", categoryHandler)
+
+	tagHandler := &tagHandler{}
+	http.Handle("/tag/{tag}/{$}", tagHandler)
+
 	contentHandler := &contentHandler{}
 	http.Handle("/{segments...}", contentHandler)
 

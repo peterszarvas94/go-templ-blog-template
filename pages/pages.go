@@ -13,7 +13,6 @@ type (
 	PostPage     func(post *pkg.FileData) templ.Component
 	TagPage      func(tag string, files []*pkg.FileData) templ.Component
 	CategoryPage func(category string, files []*pkg.FileData) templ.Component
-	SearchPage   func() templ.Component
 )
 
 var (
@@ -22,5 +21,4 @@ var (
 	Post     PostPage     = templates.PostPage
 	Tag      TagPage      = templates.TagPage
 	Category CategoryPage = templates.CategoryPage
-	Search   SearchPage   = templates.SearchPage
 )

@@ -7,7 +7,6 @@ import (
 	"peterszarvas94/blog/config"
 	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
-	"strings"
 
 	"github.com/a-h/templ"
 )
@@ -23,47 +22,6 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	r.Header.Set("Expires", "0")
 
 	url := r.URL.Path
-
-	if url == "/" {
-		files := pkg.GetFiles()
-		handler := templ.Handler(pages.Index(files))
-		handler.ServeHTTP(w, r)
-		return
-	}
-
-	if strings.HasPrefix(url, "/tag") {
-		tag := path.Base(url)
-
-		tags := pkg.GetTags()
-		files := tags[tag]
-		fmt.Println(files)
-
-		handler := templ.Handler(pages.NotFound())
-
-		if len(files) > 0 {
-			handler = templ.Handler(pages.Tag(tag, files))
-		}
-
-		handler.ServeHTTP(w, r)
-		return
-	}
-
-	if strings.HasPrefix(url, "/category") {
-		category := path.Base(url)
-
-		categories := pkg.GetCategories()
-		files := categories[category]
-
-		handler := templ.Handler(pages.Category(category, files))
-		handler.ServeHTTP(w, r)
-		return
-	}
-
-	if strings.HasPrefix(url, "/search") {
-		handler := templ.Handler(pages.Search())
-		handler.ServeHTTP(w, r)
-		return
-	}
 
 	pathToFile := path.Join(config.Dirs.Content, url)
 

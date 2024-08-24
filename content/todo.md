@@ -9,21 +9,23 @@ excerpt: "Way to prod"
 
 ## P1
 
-- [x]category page
-- [x]upgrade tag page
-- [x]add github link somewhere
-- [x]add contact info and some about info
-- [ ]documentations an tutorials
+- [x] category page
+- [x] upgrade tag page
+- [x] add github link somewhere
+- [x] add contact info and some about info
+- [ ] documentations an tutorials
 
 ## P2
 
-- [ ]multilanguage
-- [x]search: json or google?
-- [ ]seo things on frontmatter
-- [ ]error handling
-- [ ]accessibility
+- [ ] multilanguage
+- [x] search: json or google?
+- [ ] seo things on frontmatter
+- [ ] error handling
+- [ ] accessibility
+- [ ] rewrite search.js to typesript, bundled with vite to a single js file
+- [ ] organize packages
 
 ## P3
 
-- [ ]rss ??
-- [ ]xml site map???
+- [ ] rss ??
+- [ ] xml site map???
