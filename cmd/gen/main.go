@@ -112,7 +112,7 @@ func main() {
 	}
 
 	// static
-	err = CopyFlatDir(config.Dirs.Static, "public/static")
+	err = CopyDir(config.Dirs.Static, "public/static")
 	if err != nil {
 		panic(err)
 	}
