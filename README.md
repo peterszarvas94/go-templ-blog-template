@@ -66,6 +66,10 @@ type (
 )
 ```
 
+> You need to implement a catch-all logic in you files server, if you want to
+> use a custrom 404 (not found) page. If you serve static files via the built-in
+> `make ssg` command, this logic is already implemented
+
 ### Switching themes
 
 When running the following command, the files from the theme folder gets copied
