@@ -3,9 +3,9 @@ tmp_dir = "bin"
 
 [build]
   bin = "./bin/ssr"
-  cmd = "echo '------' && make theme name=default && go build -o ./bin/ssr ./cmd/ssr"
+  cmd = "echo '------' && go build -o ./bin/ssr ./cmd/ssr"
   delay = 100
-  exclude_dir = ["bin", "static"]
+  exclude_dir = ["bin"]
   include_ext = ["go", "md", "css", "js"]
   stop_on_error = false
 
