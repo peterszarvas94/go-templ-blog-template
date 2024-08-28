@@ -23,17 +23,3 @@ gen:
 
 ssg:
 	go run ./cmd/ssg
-
-# theme switch:
-# e.g. make theme name=default
-
-theme:
-	@if [ -d "themes/$(name)/static" ]; then \
-		rm -rf static/*; \
-		rm -rf templates/*; \
-		cp -r themes/$(name)/static/* static; \
-		cp -r themes/$(name)/templates/* templates 2>/dev/null || true; \
-		echo "Theme '$(name)' applied."; \
-	else \
-		echo "Theme '$(name)' not found."; \
-	fi

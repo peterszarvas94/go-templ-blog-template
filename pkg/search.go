@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
-	"peterszarvas94/blog/config"
 )
 
 type FileJson struct {
@@ -45,7 +44,7 @@ func WriteFilesJsonFile() error {
 		return err
 	}
 
-	path := filepath.Join(config.Dirs.Static, "files.json")
+	path := filepath.Join("theme", "static", "files.json")
 
 	err = os.WriteFile(path, []byte(jsonData), 0644)
 	if err != nil {

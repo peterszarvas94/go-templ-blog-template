@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"peterszarvas94/blog/config"
 	"sort"
 	"strings"
 	"time"
@@ -28,9 +27,7 @@ func GetFiles() []*FileData {
 func CollectFiles() error {
 	files = files[:0]
 
-	dirName := config.Dirs.Content
-
-	err := filepath.Walk(dirName, walkContentDir)
+	err := filepath.Walk("content", walkContentDir)
 	if err != nil {
 		return err
 	}
@@ -68,7 +65,7 @@ func walkContentDir(path string, info os.FileInfo, err error) error {
 	}
 
 	fileroute := strings.TrimSuffix(path, ".md")
-	fileroute = strings.TrimPrefix(fileroute, config.Dirs.Content)
+	fileroute = strings.TrimPrefix(fileroute, "content")
 
 	dateTime, err := parseDateTime(&matter)
 	if err != nil {

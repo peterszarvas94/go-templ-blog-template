@@ -1,0 +1,19 @@
+package templates
+
+import (
+	"peterszarvas94/blog/config"
+)
+
+templ header() {
+	<header>
+		<div>
+			<a href="/">{ config.Title }</a>
+			<form action="/" method="get" id="search-form">
+				<input type="text" name="search" placeholder="Search..."/>
+				<button type="submit">
+					@searchIcon()
+				</button>
+			</form>
+		</div>
+	</header>
+}

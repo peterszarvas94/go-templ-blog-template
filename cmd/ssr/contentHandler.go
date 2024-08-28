@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"path"
-	"peterszarvas94/blog/config"
 	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
 
@@ -23,7 +22,7 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	url := r.URL.Path
 
-	pathToFile := path.Join(config.Dirs.Content, url)
+	pathToFile := path.Join("content", url)
 
 	pathToFileWithExtension := fmt.Sprintf("%s.md", pathToFile)
 

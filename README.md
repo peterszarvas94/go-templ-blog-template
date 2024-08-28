@@ -39,19 +39,17 @@ well:
 
 ## Themes
 
-You can add a new theme under `themes/mytheme/` (replace `mytheme` with the name
-of the theme), whith the following structure:
+You can put you custom theme under `/theme`.
 
 ```txt
-themes
-└── mytheme
-    ├── static
-    └── templates
+theme
+├── static
+└── templates
 ```
 
-Put static files like `css`, `js`, images etc. under `themes/mytheme/static`.
+Put static files like `css`, `js`, images etc. under `theme/static`.
 
-Put `templ` components under `themes/mytheme/templates`.
+Put `templ` components under `theme/templates`.
 
 Every theme should have the following `templ` components exported from the root
 directory of the theme, as you can see in the `pages/page.go`:
@@ -67,12 +65,11 @@ type (
 ```
 
 > You need to implement a catch-all logic in you files server, if you want to
-> use a custrom 404 (not found) page. If you serve static files via the built-in
-> `make ssg` command, this logic is already implemented
+> use the custom 404 (not found) page. If you serve static files via the
+> built-in `make ssg` command, this logic is already implemented
 
 ### Switching themes
 
-When running the following command, the files from the theme folder gets copied
-over the appropriate directories:
-
-`make theme name=mytheme`
+You should backup you old theme folder, before cloning or writing a new theme.
+Theme switching is a manual process for now, mabye should be improved in the
+future.

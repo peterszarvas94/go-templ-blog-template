@@ -1,6 +1,4 @@
 bin/
 public/
-templates/*.go
-templates/*.txt
-themes/**/*.go
-themes/**/*.txt
+theme/**/*.go
+theme/**/*.txt

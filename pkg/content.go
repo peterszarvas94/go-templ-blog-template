@@ -2,14 +2,13 @@ package pkg
 
 import (
 	"os"
-	"peterszarvas94/blog/config"
 	"strings"
 )
 
-var protectedNames = []string{"static", "tag", "category", "search"}
+var protectedNames = []string{"static", "tag", "category"}
 
 func CheckContentDir() error {
-	folder, err := os.Open(config.Dirs.Content)
+	folder, err := os.Open("content")
 	if err != nil {
 		return err
 	}

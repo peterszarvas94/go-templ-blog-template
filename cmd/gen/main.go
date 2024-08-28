@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	publicDir := config.Dirs.Public
+	publicDir := "public"
 
 	if _, err := os.Stat(publicDir); !os.IsNotExist(err) {
 		err = os.RemoveAll(publicDir)
@@ -112,7 +112,10 @@ func main() {
 	}
 
 	// static
-	err = CopyDir(config.Dirs.Static, "public/static")
+	staticSrc := path.Join("theme", "static")
+	staticDst := path.Join("public", "static")
+
+	err = CopyDir(staticSrc, staticDst)
 	if err != nil {
 		panic(err)
 	}

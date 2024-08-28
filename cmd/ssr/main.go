@@ -3,12 +3,11 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"peterszarvas94/blog/config"
-	_ "peterszarvas94/blog/pkg"
+	_ "peterszarvas94/blog/pkg/init"
 )
 
 func main() {
-	fs := http.FileServer(http.Dir(config.Dirs.Static))
+	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {

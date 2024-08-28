@@ -2,7 +2,7 @@ package pages
 
 import (
 	"peterszarvas94/blog/pkg"
-	"peterszarvas94/blog/templates"
+	"peterszarvas94/blog/theme/templates"
 
 	"github.com/a-h/templ"
 )
