@@ -10,13 +10,22 @@ import (
 func main() {
 	fs := http.FileServer(http.Dir("public"))
 
+	notFoundPage := filepath.Join("public", "404", "index.html")
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		filePath := filepath.Join("public", r.URL.Path)
+		filePath := filepath.Join("public", r.URL.Path, "index.html")
 
 		fileInfo, err := os.Stat(filePath)
 		if os.IsNotExist(err) || (err == nil && fileInfo.IsDir()) {
 			w.WriteHeader(http.StatusNotFound)
-			http.ServeFile(w, r, filepath.Join("public", "404.html"))
+
+			content, err := os.ReadFile(notFoundPage)
+			if err != nil {
+				w.Write([]byte("404 - Page not found"))
+				return
+			}
+
+			w.Write(content)
 			return
 		}
 

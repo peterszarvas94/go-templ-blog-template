@@ -41,7 +41,7 @@ func CopyDir(srcDir, dstDir string) error {
 			if err := copyFile(srcPath, dstPath); err != nil {
 				return err
 			} else {
-				fmt.Printf("Copied static file: %s\n", dstPath)
+				fmt.Printf("🗿 Copied static file: %s\n", dstPath)
 			}
 		}
 	}

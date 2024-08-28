@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var protectedNames = []string{"static", "tag", "category"}
+var protectedNames = []string{"404", "static", "tag", "category"}
 
 func CheckContentDir() error {
 	folder, err := os.Open("content")
@@ -32,7 +32,7 @@ func CheckContentDir() error {
 	for _, dirName := range dirNames {
 		for _, protectedName := range protectedNames {
 			if dirName == protectedName {
-				return &ProtectedNameError{dirName, "directory"}
+				return &ProtectedNameError{dirName, "directory "}
 			}
 		}
 	}
