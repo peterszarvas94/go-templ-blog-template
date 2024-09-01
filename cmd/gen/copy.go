@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
 )
@@ -24,26 +25,34 @@ func copyFile(srcPath, dstPath string) error {
 	return err
 }
 
-func CopyDir(srcDir, dstDir string) error {
-	files, err := os.ReadDir(srcDir)
-	if err != nil {
-		return err
-	}
+func walkAndCopy(srcDir, dstDir string) fs.WalkDirFunc {
+	return func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
 
-	if err := os.MkdirAll(dstDir, os.ModePerm); err != nil {
-		return err
-	}
+		relPath, err := filepath.Rel(srcDir, path)
+		if err != nil {
+			return err
+		}
 
-	for _, file := range files {
-		if !file.IsDir() {
-			srcPath := filepath.Join(srcDir, file.Name())
-			dstPath := filepath.Join(dstDir, file.Name())
-			if err := copyFile(srcPath, dstPath); err != nil {
+		dstPath := filepath.Join(dstDir, relPath)
+
+		if d.IsDir() {
+			if err := os.MkdirAll(dstPath, os.ModePerm); err != nil {
+				return err
+			}
+		} else {
+			if err := copyFile(path, dstPath); err != nil {
 				return err
 			} else {
-				fmt.Printf("🗿 Copied static file: %s\n", dstPath)
+				fmt.Printf("🗿 Copied file: %s\n", dstPath)
 			}
 		}
+		return nil
 	}
-	return nil
+}
+
+func CopyDir(srcDir, dstDir string) error {
+	return filepath.WalkDir(srcDir, walkAndCopy(srcDir, dstDir))
 }

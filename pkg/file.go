@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"sort"
@@ -27,7 +28,7 @@ func GetFiles() []*FileData {
 func CollectFiles() error {
 	files = files[:0]
 
-	err := filepath.Walk("content", walkContentDir)
+	err := filepath.WalkDir("content", walkAndCollect(files))
 	if err != nil {
 		return err
 	}
@@ -39,53 +40,55 @@ func CollectFiles() error {
 	return nil
 }
 
-func walkContentDir(path string, info os.FileInfo, err error) error {
-	if err != nil {
-		return err
-	}
+func walkAndCollect(files []*FileData) fs.WalkDirFunc {
+	return func(path string, info fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
 
-	if info.IsDir() || !strings.HasSuffix(info.Name(), ".md") {
+		if info.IsDir() || !strings.HasSuffix(info.Name(), ".md") {
+			return nil
+		}
+
+		contentBytes, err := os.ReadFile(path)
+		if err != nil {
+			return fmt.Errorf("failed to read file: %s", path)
+		}
+
+		rawContent := string(contentBytes)
+		matter, rawBody, err := parseFrontMatter(rawContent)
+		if err != nil {
+			return fmt.Errorf("failed to parse front matter: %s", path)
+		}
+
+		html, err := parseFileContent(rawBody)
+		if err != nil {
+			return fmt.Errorf("failed to parse file content: %s", path)
+		}
+
+		fileroute := strings.TrimSuffix(path, ".md")
+		fileroute = strings.TrimPrefix(fileroute, "content")
+
+		dateTime, err := parseDateTime(&matter)
+		if err != nil {
+			return fmt.Errorf("failed to parse date time: %s", path)
+		}
+
+		content := StripHTMLTags(html)
+
+		// Get the first part (before the dot)
+		file := &FileData{
+			Fileroute: fileroute,
+			Matter:    matter,
+			DateTime:  dateTime,
+			Html:      html,
+			Content:   content,
+			Path:      path,
+		}
+		files = append(files, file)
+
 		return nil
 	}
-
-	contentBytes, err := os.ReadFile(path)
-	if err != nil {
-		return fmt.Errorf("failed to read file: %s", path)
-	}
-
-	rawContent := string(contentBytes)
-	matter, rawBody, err := parseFrontMatter(rawContent)
-	if err != nil {
-		return fmt.Errorf("failed to parse front matter: %s", path)
-	}
-
-	html, err := parseFileContent(rawBody)
-	if err != nil {
-		return fmt.Errorf("failed to parse file content: %s", path)
-	}
-
-	fileroute := strings.TrimSuffix(path, ".md")
-	fileroute = strings.TrimPrefix(fileroute, "content")
-
-	dateTime, err := parseDateTime(&matter)
-	if err != nil {
-		return fmt.Errorf("failed to parse date time: %s", path)
-	}
-
-	content := StripHTMLTags(html)
-
-	// Get the first part (before the dot)
-	file := &FileData{
-		Fileroute: fileroute,
-		Matter:    matter,
-		DateTime:  dateTime,
-		Html:      html,
-		Content:   content,
-		Path:      path,
-	}
-	files = append(files, file)
-
-	return nil
 }
 
 func FindFileFromFilePath(filePath string) (*FileData, error) {

@@ -8,13 +8,15 @@ import (
 )
 
 func main() {
-	staticDir := path.Join("theme", "static")
+	staticDirPath := path.Join("theme", "static")
 
-	fs := http.FileServer(http.Dir(staticDir))
+	fs := http.FileServer(http.Dir(staticDirPath))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
+	faviconPath := path.Join(staticDirPath, "favicon.ico")
+
 	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "favicon.ico")
+		http.ServeFile(w, r, faviconPath)
 	})
 
 	indexHandler := &indexHandler{}

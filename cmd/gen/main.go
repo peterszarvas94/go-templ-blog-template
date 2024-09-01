@@ -28,6 +28,16 @@ func main() {
 
 	files := pkg.GetFiles()
 
+	// favicon
+	faviconSrc := path.Join("theme", "static", "favicon.ico")
+	faviconDst := path.Join("public", "favicon.ico")
+	err = copyFile(faviconSrc, faviconDst)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("🌟 Copied favicon:", faviconDst)
+
 	// index
 	indexFileName := path.Join("public", "index.html")
 	indexFile, err := os.Create(indexFileName)
