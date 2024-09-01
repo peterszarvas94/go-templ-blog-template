@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"path"
+	"peterszarvas94/blog/pages"
+	"peterszarvas94/blog/pkg"
 	_ "peterszarvas94/blog/pkg/init"
 )
 
 func main() {
+	pkg.AddCustomComponent("test", pages.NotFound())
+
 	staticDirPath := path.Join("theme", "static")
 
 	fs := http.FileServer(http.Dir(staticDirPath))
