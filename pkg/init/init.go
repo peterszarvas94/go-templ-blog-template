@@ -13,12 +13,12 @@ func init() {
 
 	fmt.Println("✅ Content directory is valid")
 
-	err = pkg.CollectFiles()
+	n, err := pkg.CollectFiles()
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("✅ Collected files")
+	fmt.Printf("✅ Collected %d files\n", n)
 
 	err = pkg.WriteFilesJsonFile()
 	if err != nil {
