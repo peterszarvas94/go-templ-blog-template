@@ -14,6 +14,7 @@ excerpt: "Way to prod"
 - [x] add github link somewhere
 - [x] add contact info and some about info
 - [ ] documentations an tutorials
+- [ ] custom routes and components
 
 ## P2
 
@@ -22,7 +23,7 @@ excerpt: "Way to prod"
 - [ ] seo things on frontmatter
 - [ ] error handling
 - [ ] accessibility
-- [ ] rewrite search.js to typesript, bundled with vite to a single js file
+- [ ] rewrite search.js to typesript
 - [ ] organize packages
 
 ## P3

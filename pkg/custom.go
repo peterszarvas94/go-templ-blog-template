@@ -22,5 +22,3 @@ func GetAllRoutesForCustomComponents() []string {
 	}
 	return keys
 }
-
-// TODO define custom components

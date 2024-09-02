@@ -10,7 +10,7 @@
     "id": 1,
     "title": "TODO",
     "excerpt": "Way to prod",
-    "content": "P1\n\n category page\n upgrade tag page\n add github link somewhere\n add contact info and some about info\n documentations an tutorials\n\nP2\n\n multilanguage\n search: json or google?\n seo things on frontmatter\n error handling\n accessibility\n rewrite search.js to typesript, bundled with vite to a single js file\n organize packages\n\nP3\n\n rss ??\n xml site map???\n\n",
+    "content": "P1\n\n category page\n upgrade tag page\n add github link somewhere\n add contact info and some about info\n documentations an tutorials\n custom routes and components\n\nP2\n\n multilanguage\n search: json or google?\n seo things on frontmatter\n error handling\n accessibility\n rewrite search.js to typesript\n organize packages\n\nP3\n\n rss ??\n xml site map???\n\n",
     "route": "todo"
   },
   {
