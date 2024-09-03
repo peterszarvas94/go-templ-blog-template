@@ -1,24 +1,25 @@
 package templates
 
 import (
-	"peterszarvas94/blog/pkg"
 	"fmt"
+	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/theme/templates/components"
 )
 
 templ TagPage(tag string, files []*pkg.FileData) {
-	@head()
+	@components.Head()
 	@tagBody(tag, files)
 }
 
 templ tagBody(tag string, files []*pkg.FileData) {
 	<body>
-		@header()
+		@components.Header()
 		<main class="page tag-page">
 			<h1>
 				<div>{ fmt.Sprintf("# %s", tag) }</div>
 			</h1>
-			@articleList(files)
+			@components.ArticleList(files)
 		</main>
-		@footer()
+		@components.Footer()
 	</body>
 }

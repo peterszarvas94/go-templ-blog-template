@@ -1,13 +1,17 @@
 package templates
 
+import (
+	"peterszarvas94/blog/theme/templates/components"
+)
+
 templ NotFoundPage() {
-	@head()
+	@components.Head()
 	@notFoundBody()
 }
 
 templ notFoundBody() {
 	<body>
-		@header()
+		@components.Header()
 		<main class="page notfound-page">
 			<h1>404</h1>
 			<div>Page not found.</div>

@@ -2,13 +2,13 @@ package pkg
 
 import (
 	"bytes"
-	"peterszarvas94/blog/config"
+	"peterszarvas94/blog/pkg/config"
 	"strings"
 	"time"
 
 	"github.com/adrg/frontmatter"
 	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark-emoji"
+	emoji "github.com/yuin/goldmark-emoji"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
 )

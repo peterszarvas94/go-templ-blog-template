@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/pkg/custom"
 	_ "peterszarvas94/blog/pkg/init"
+	"peterszarvas94/blog/pkg/pages"
 )
 
 func main() {
@@ -145,6 +146,27 @@ func main() {
 	err = CopyDir(staticSrc, staticDst)
 	if err != nil {
 		panic(err)
+	}
+
+	// custom
+	for route, component := range *custom.Routes {
+		dir := path.Join("public", route)
+		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
+			panic(err)
+		}
+
+		fileName := path.Join(dir, "index.html")
+		file, err := os.Create(fileName)
+		if err != nil {
+			panic(err)
+		}
+
+		err = component.Render(context.Background(), file)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println("🔧 Generated custom page:", fileName)
 	}
 
 	fmt.Println("✅ Done")

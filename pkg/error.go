@@ -3,15 +3,15 @@ package pkg
 import "fmt"
 
 type ProtectedNameError struct {
-	name string
-	kind string
+	Name string
+	Kind string
 }
 
 func (e *ProtectedNameError) Error() string {
 	return fmt.Sprintf(
 		"You can not use \"%s\" as %sname in content folder",
-		e.name,
-		e.kind,
+		e.Name,
+		e.Kind,
 	)
 }
 

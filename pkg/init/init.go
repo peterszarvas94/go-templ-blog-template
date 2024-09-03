@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	err := pkg.CheckContentDir()
+	err := CheckContentDir()
 	if err != nil {
 		panic(err)
 	}

@@ -2,8 +2,8 @@ package main
 
 import (
 	"net/http"
-	"peterszarvas94/blog/pages"
 	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/pkg/pages"
 
 	"github.com/a-h/templ"
 )

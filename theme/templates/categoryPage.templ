@@ -2,23 +2,24 @@ package templates
 
 import (
 	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/theme/templates/components"
 )
 
 templ CategoryPage(category string, files []*pkg.FileData) {
-	@head()
+	@components.Head()
 	@categoryBody(category, files)
 }
 
 templ categoryBody(category string, files []*pkg.FileData) {
 	<body>
-		@header()
+		@components.Header()
 		<main class="page category-page">
 			<h1>
-				@categoryIcon()
+				@components.CategoryIcon()
 				<div>{ category }</div>
 			</h1>
-			@articleList(files)
+			@components.ArticleList(files)
 		</main>
-		@footer()
+		@components.Footer()
 	</body>
 }
