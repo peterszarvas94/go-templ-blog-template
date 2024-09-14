@@ -47,9 +47,16 @@ func main() {
 		panic(err)
 	}
 
-	err = pages.Index(files).Render(context.Background(), indexFile)
-	if err != nil {
-		panic(err)
+	if customHomePage, exists := (*custom.Routes)["/"]; exists {
+		err = customHomePage.Render(context.Background(), indexFile)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		err = pages.Index(files).Render(context.Background(), indexFile)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	fmt.Println("🏠 Generated home page:", indexFileName)

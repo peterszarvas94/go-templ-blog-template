@@ -1,0 +1,23 @@
+package templates
+
+import (
+	"peterszarvas94/blog/pkg/fileutils"
+	"peterszarvas94/blog/pkg/config"
+	"peterszarvas94/blog/theme/templates/components"
+)
+
+templ PostsPage(files []*fileutils.FileData) {
+	@components.Head()
+	@postsBody(files)
+}
+
+templ postsBody(files []*fileutils.FileData) {
+	<body>
+		@components.Header()
+		<main class="page posts-page">
+			<h1>{ config.IndexTitle }</h1>
+			@components.ArticleList(files)
+		</main>
+		@components.Footer()
+	</body>
+}

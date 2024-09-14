@@ -13,10 +13,10 @@ excerpt: "Way to prod"
 - [x] upgrade tag page
 - [x] add github link somewhere
 - [x] add contact info and some about info
-- [ ] documentations an tutorials
 - [x] custom routes and components
-  - [ ] custom home page
+- [x] custom home page opt-in
 - [ ] killer home page
+- [ ] documentations an tutorials
 
 ## 0.2
 
@@ -32,3 +32,9 @@ excerpt: "Way to prod"
 
 - [ ] rss ??
 - [ ] xml site map???
+
+## ...
+
+## 1.0
+
+- [ ] profit

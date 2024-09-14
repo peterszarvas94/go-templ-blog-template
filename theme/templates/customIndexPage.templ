@@ -1,0 +1,23 @@
+package templates
+
+import (
+	"peterszarvas94/blog/theme/templates/components"
+	"peterszarvas94/blog/pkg/config"
+)
+
+templ CustomIndexPage() {
+	@components.Head()
+	@customIndexBody()
+}
+
+templ customIndexBody() {
+	<body>
+		@components.Header()
+		<main class="page index-page">
+			<h1>{ config.IndexTitle }</h1>
+			<div>wow such landing page</div>
+			<a href="/posts">Posts</a>
+		</main>
+		@components.Footer()
+	</body>
+}
