@@ -1,13 +1,14 @@
 package components 
 
 import "peterszarvas94/blog/pkg"
+import "fmt"
 
 templ ArticleList(files []*pkg.FileData) {
 	<ul class="article-list">
 		for _, file:= range files {
 			<li>
 				<h2>
-					<a href={ templ.SafeURL(file.Fileroute) }>
+					<a href={ templ.SafeURL(fmt.Sprintf("/%s", file.Fileroute)) }>
 						{ file.Matter.Title }
 					</a>
 				</h2>
@@ -15,7 +16,7 @@ templ ArticleList(files []*pkg.FileData) {
 					{ file.Matter.Excerpt }
 				</div>
 				<div class="readmore">
-					<a href={ templ.SafeURL(file.Fileroute) }>
+					<a href={ templ.SafeURL(fmt.Sprintf("/%s", file.Fileroute)) }>
 						Read more
 					</a>
 				</div>

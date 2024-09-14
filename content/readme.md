@@ -1,4 +1,12 @@
-# lytepage
+---
+title: "Introduction"
+category: "about"
+tags: ["intro", "docs"]
+date: "2024.08.12"
+time: "11:15"
+excerpt:
+  "Lite yet powerful static side generator, using the power of go and templ"
+---
 
 ## Goals
 

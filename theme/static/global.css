@@ -202,3 +202,9 @@ footer {
     }
   }
 }
+
+.custom-page {
+  a {
+    color: var(--link-fg);
+  }
+}

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/pkg/pages"
@@ -16,7 +15,6 @@ func (h *tagHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	tags := pkg.GetTags()
 	files := tags[tag]
-	fmt.Println(files)
 
 	handler := templ.Handler(pages.NotFound())
 

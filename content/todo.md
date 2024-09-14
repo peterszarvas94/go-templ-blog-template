@@ -14,7 +14,7 @@ excerpt: "Way to prod"
 - [x] add github link somewhere
 - [x] add contact info and some about info
 - [ ] documentations an tutorials
-- [ ] custom routes and components
+- [x] custom routes and components
 
 ## P2
 
