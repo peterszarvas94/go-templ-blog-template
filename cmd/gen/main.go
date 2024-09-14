@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/pkg/custom"
+	"peterszarvas94/blog/pkg/fileutils"
 	_ "peterszarvas94/blog/pkg/init"
 	"peterszarvas94/blog/pkg/pages"
+	"strings"
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 
 	fmt.Println("✅ Generated public directory: ", "public")
 
-	files := pkg.GetFiles()
+	files := fileutils.GetFiles()
 
 	// favicon
 	faviconSrc := path.Join("theme", "static", "favicon.ico")
@@ -74,7 +75,7 @@ func main() {
 
 	// posts
 	for _, file := range files {
-		dir := path.Join("public", file.Fileroute)
+		dir := path.Join("public", strings.TrimPrefix(file.Fileroute, "/"))
 		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
 			panic(err)
 		}
@@ -94,7 +95,7 @@ func main() {
 	}
 
 	// tags
-	tags := pkg.GetTags()
+	tags := fileutils.GetTags()
 
 	for tag, files := range tags {
 		dir := path.Join("public", "tag", tag)
@@ -117,7 +118,7 @@ func main() {
 	}
 
 	// categories
-	category := pkg.GetCategories()
+	category := fileutils.GetCategories()
 
 	for category, files := range category {
 		dir := path.Join("public", "category", category)

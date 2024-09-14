@@ -1,4 +1,4 @@
-package pkg
+package fileutils
 
 import (
 	"fmt"
@@ -78,7 +78,7 @@ func processFile(path string) (*FileData, error) {
 		return nil, fmt.Errorf("failed to parse file content from file %s: %w", path, err)
 	}
 
-	fileroute := strings.TrimSuffix(strings.TrimPrefix(path, "content/"), ".md")
+	fileroute := strings.TrimSuffix(strings.TrimPrefix(path, "content"), ".md")
 
 	dateTime, err := parseDateTime(&matter)
 	if err != nil {
@@ -126,4 +126,13 @@ func GetCategories() map[string][]*FileData {
 		categories[file.Matter.Category] = append(categories[file.Matter.Category], file)
 	}
 	return categories
+}
+
+func init() {
+	n, err := CollectFiles()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("✅ Collected %d files\n", n)
 }

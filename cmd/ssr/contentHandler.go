@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"path"
-	"peterszarvas94/blog/pkg"
 	"peterszarvas94/blog/pkg/custom"
+	"peterszarvas94/blog/pkg/fileutils"
 	"peterszarvas94/blog/pkg/pages"
 
 	"github.com/a-h/templ"
@@ -34,7 +34,7 @@ func (h *contentHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	pathToFileWithExtension := fmt.Sprintf("%s.md", pathToFile)
 
-	file, err := pkg.FindFileFromFilePath(pathToFileWithExtension)
+	file, err := fileutils.FindFileFromFilePath(pathToFileWithExtension)
 	if err != nil {
 		templ.Handler(pages.NotFound()).ServeHTTP(w, r)
 		return

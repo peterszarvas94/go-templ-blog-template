@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/pkg/fileutils"
 	"peterszarvas94/blog/pkg/pages"
 
 	"github.com/a-h/templ"
@@ -13,7 +13,7 @@ type tagHandler struct{}
 func (h *tagHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tag := r.PathValue("tag")
 
-	tags := pkg.GetTags()
+	tags := fileutils.GetTags()
 	files := tags[tag]
 
 	handler := templ.Handler(pages.NotFound())

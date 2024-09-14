@@ -1534,7 +1534,7 @@ function _t() {
 function pt(n, t) {
   n.filter((e) => {
     var r;
-    const s = ((r = e.querySelector("a")) == null ? void 0 : r.href) || "", o = new URL(s).pathname.slice(1);
+    const s = ((r = e.querySelector("a")) == null ? void 0 : r.href) || "", o = new URL(s).pathname;
     return !t.includes(o);
   }).forEach((e) => {
     e.style.display = "none";

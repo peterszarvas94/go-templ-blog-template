@@ -6,12 +6,15 @@ import (
 	"peterszarvas94/blog/theme/templates/components"
 )
 
-templ IndexPage(files []*fileutils.FileData) {
-	@components.Head()
+templ SearchPage(files []*fileutils.FileData) {
+	@components.Head() {
+		<script src="https://cdn.jsdelivr.net/npm/minisearch@7.1.0/dist/umd/index.min.js"></script>
+		<script src="/static/search.js" type="module" defer></script>
+	}
 	@indexBody(files)
 }
 
-templ indexBody(files []*fileutils.FileData) {
+templ searchBody(files []*fileutils.FileData) {
 	<body>
 		@components.Header()
 		<main class="page index-page">

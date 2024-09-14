@@ -1,29 +1,26 @@
-package init
+package pkg
 
 import (
 	"fmt"
-	"peterszarvas94/blog/pkg"
+	"peterszarvas94/blog/pkg/check"
+	"peterszarvas94/blog/pkg/config"
+	"peterszarvas94/blog/pkg/fileutils"
 )
 
 func init() {
-	err := CheckContentDir()
+	err := check.CheckContentDir()
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("✅ Content directory is valid")
 
-	n, err := pkg.CollectFiles()
-	if err != nil {
-		panic(err)
+	if config.GeneretareFilesJson {
+		err = fileutils.WriteFilesJsonFile()
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println("✅ Generated files.json")
 	}
-
-	fmt.Printf("✅ Collected %d files\n", n)
-
-	err = pkg.WriteFilesJsonFile()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("✅ Generated files.json")
 }

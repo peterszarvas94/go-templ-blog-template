@@ -1,4 +1,4 @@
-package pkg
+package fileutils
 
 import (
 	"encoding/json"

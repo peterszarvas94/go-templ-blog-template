@@ -7,7 +7,7 @@ time: "11:14"
 excerpt: "Way to prod"
 ---
 
-## P1
+## 0.1
 
 - [x] category page
 - [x] upgrade tag page
@@ -15,8 +15,10 @@ excerpt: "Way to prod"
 - [x] add contact info and some about info
 - [ ] documentations an tutorials
 - [x] custom routes and components
+  - [ ] custom home page
+- [ ] killer home page
 
-## P2
+## 0.2
 
 - [ ] multilanguage
 - [x] search: json or google?
@@ -26,7 +28,7 @@ excerpt: "Way to prod"
 - [ ] rewrite search.js to typesript
 - [ ] organize packages
 
-## P3
+## 0.3
 
 - [ ] rss ??
 - [ ] xml site map???

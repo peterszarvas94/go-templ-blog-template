@@ -60,7 +60,7 @@ export function filterArticles(articles: HTMLElement[], routes: any[]) {
     .filter((atricle) => {
       const href = atricle.querySelector("a")?.href || "";
       const url = new URL(href);
-      const pathname = url.pathname.slice(1);
+      const pathname = url.pathname;
       if (routes.includes(pathname)) {
         return false;
       } else {

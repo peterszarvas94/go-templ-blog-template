@@ -4,6 +4,7 @@ templ:
 	templ generate --watch --proxy="http://localhost:8080/" --open-browser="false"
 
 dev:
+	templ generate
 	air -c .air.toml
 
 # ssr mode:
