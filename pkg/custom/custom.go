@@ -10,7 +10,7 @@ import (
 type routeMap map[string]templ.Component
 
 var Routes = &routeMap{
-	"/search": templates.SearchPage(fileutils.GetFiles()),
 	"/":       templates.CustomIndexPage(fileutils.GetFileByTitle("index")),
+	"/search": templates.SearchPage(fileutils.GetFiles()),
 	"/docs":   templates.PostsPage(fileutils.GetFiles()),
 }

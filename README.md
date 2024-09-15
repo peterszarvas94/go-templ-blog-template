@@ -60,10 +60,10 @@ directory of the theme, as you can see in the `pages/page.go`:
 ```go
 type (
   NotFoundPage func() templ.Component
-  IndexPage    func(files []*pkg.FileData) templ.Component
-  PostPage     func(post *pkg.FileData) templ.Component
-  TagPage      func(tag string, files []*pkg.FileData) templ.Component
-  CategoryPage func(category string, files []*pkg.FileData) templ.Component
+  IndexPage    func(files []*fileutils.FileData) templ.Component
+  PostPage     func(post *fileutils.FileData) templ.Component
+  TagPage      func(tag string, files []*fileutils.FileData) templ.Component
+  CategoryPage func(category string, files []*fileutils.FileData) templ.Component
 )
 ```
 
@@ -87,10 +87,10 @@ using `.md` files with
 protected routes which you can not use, and it will cause the program to panic.
 These are the following:
 
-- 404
-- static
-- tag
-- category
+- /404
+- /static
+- /tag
+- /category
 
 as well as any
 [custom route](https://github.com/peterszarvas94/lytepage#custom-routes) you
@@ -135,6 +135,7 @@ tags: ["tag1", "tag2"]
 date: "2024.01.02"
 time: "11:15"
 excerpt: "This is an excrept from the article"
+hidden: true
 ```
 
 The date and datetime format can be configured in the `pkg/config/config.go`
@@ -160,8 +161,15 @@ type FrontMatter struct {
   Date     string   `yaml:"date"`
   Time     string   `yaml:"time"`
   Excerpt  string   `yaml:"excerpt"`
+  Hidden   bool     `yaml:"hidden"`
 }
 ```
+
+If you set `hidden: true` in the frontmatter, your file will not be generated or
+served as usual, but you can still use the generated content anywhere in your
+template. E.g. the `index.md` file is hidden, so it does not appear in the
+article list, but the landing page uses it`s content. See
+[custom routes](https://github.com/peterszarvas94/lytepage#custom-routes) below.
 
 ### Category
 
@@ -196,7 +204,9 @@ You can define custom routes in `pkg/custom/custom.go` by adding element to the
 
 ```go
 var Routes = &routeMap{
-  "/custom": templates.CustomPage(),
+  "/":       templates.CustomIndexPage(fileutils.GetFileByTitle("index")),
+  "/search": templates.SearchPage(fileutils.GetFiles()),
+  "/docs":   templates.PostsPage(fileutils.GetFiles()),
 }
 ```
 

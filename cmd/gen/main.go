@@ -82,6 +82,10 @@ func main() {
 
 	// posts
 	for _, file := range files {
+		if file.Matter.Hidden {
+			continue
+		}
+
 		dir := path.Join("public", strings.TrimPrefix(file.Fileroute, "/"))
 		if err := os.MkdirAll(dir, 0755); err != nil && err != os.ErrExist {
 			panic(err)

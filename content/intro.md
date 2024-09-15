@@ -67,10 +67,10 @@ directory of the theme, as you can see in the `pages/page.go`:
 ```go
 type (
   NotFoundPage func() templ.Component
-  IndexPage    func(files []*pkg.FileData) templ.Component
-  PostPage     func(post *pkg.FileData) templ.Component
-  TagPage      func(tag string, files []*pkg.FileData) templ.Component
-  CategoryPage func(category string, files []*pkg.FileData) templ.Component
+  IndexPage    func(files []*fileutils.FileData) templ.Component
+  PostPage     func(post *fileutils.FileData) templ.Component
+  TagPage      func(tag string, files []*fileutils.FileData) templ.Component
+  CategoryPage func(category string, files []*fileutils.FileData) templ.Component
 )
 ```
 
@@ -89,19 +89,16 @@ saved anywhere else.
 ## Content
 
 You should put your content in the `content` folder in any folder structure,
-using `.md` files with
-[frontmatter](#post). There are
-protected routes which you can not use, and it will cause the program to panic.
-These are the following:
+using `.md` files with [frontmatter](#post). There are protected routes which
+you can not use, and it will cause the program to panic. These are the
+following:
 
-- 404
-- static
-- tag
-- category
+- /404
+- /static
+- /tag
+- /category
 
-as well as any
-[custom route](#custom-routes) you
-define.
+as well as any [custom route](#custom-routes) you define.
 
 ## Routes
 
@@ -125,8 +122,7 @@ In dev and SSR modes, catch-all logic is handled as well.
 ### Index
 
 The homepage displas the latest posts, like in other blog-styled frameworks. You
-can define a [custom](#custom-routes)
-index page of course.
+can define a [custom](#custom-routes) index page of course.
 
 ### Post {#post}
 
@@ -167,8 +163,15 @@ type FrontMatter struct {
   Date     string   `yaml:"date"`
   Time     string   `yaml:"time"`
   Excerpt  string   `yaml:"excerpt"`
+  Hidden   bool     `yaml:"hidden"`
 }
 ```
+
+If you set `hidden: true` in the frontmatter, your file will not be generated or
+served as usual, but you can still use the generated content anywhere in your
+template. E.g. the `index.md` file is hidden, so it does not appear in the
+article list, but the landing page uses it`s content. See
+[custom routes](#custom-routes) below.
 
 ### Category
 
@@ -203,8 +206,9 @@ You can define custom routes in `pkg/custom/custom.go` by adding element to the
 
 ```go
 var Routes = &routeMap{
-  "/custom": templates.CustomPage(),
-  "/": templates.CustomIndexPage(),
+  "/":       templates.CustomIndexPage(fileutils.GetFileByTitle("index")),
+  "/search": templates.SearchPage(fileutils.GetFiles()),
+  "/docs":   templates.PostsPage(fileutils.GetFiles()),
 }
 ```
 
