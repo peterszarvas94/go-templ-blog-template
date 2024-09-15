@@ -38,23 +38,23 @@ class L {
   dive() {
     if (this._path.length === 0)
       return { done: !0, value: void 0 };
-    const { node: t, keys: e } = z(this._path);
-    if (z(e) === p)
+    const { node: t, keys: e } = v(this._path);
+    if (v(e) === p)
       return { done: !1, value: this.result() };
-    const s = t.get(z(e));
+    const s = t.get(v(e));
     return this._path.push({ node: s, keys: Array.from(s.keys()) }), this.dive();
   }
   backtrack() {
     if (this._path.length === 0)
       return;
-    const t = z(this._path).keys;
+    const t = v(this._path).keys;
     t.pop(), !(t.length > 0) && (this._path.pop(), this.backtrack());
   }
   key() {
-    return this.set._prefix + this._path.map(({ keys: t }) => z(t)).filter((t) => t !== p).join("");
+    return this.set._prefix + this._path.map(({ keys: t }) => v(t)).filter((t) => t !== p).join("");
   }
   value() {
-    return z(this._path).node.get(p);
+    return v(this._path).node.get(p);
   }
   result() {
     switch (this._type) {
@@ -70,7 +70,7 @@ class L {
     return this;
   }
 }
-const z = (n) => n[n.length - 1], tt = (n, t, e) => {
+const v = (n) => n[n.length - 1], tt = (n, t, e) => {
   const s = /* @__PURE__ */ new Map();
   if (t === void 0)
     return s;
@@ -414,7 +414,7 @@ const k = (n, t, e = []) => {
   const [s, i] = P(n);
   s.set(i + t, e), s.delete(i);
 }, P = (n) => n[n.length - 1], W = "or", Z = "and", st = "and_not";
-class v {
+class z {
   /**
    * @param options  Configuration options
    *
@@ -979,7 +979,7 @@ class v {
       };
       Object.assign(h, this._storedFields.get(o)), (e.filter == null || e.filter(h)) && i.push(h);
     }
-    return t === v.wildcard && e.boostDocument == null && this._options.searchOptions.boostDocument == null || i.sort(q), i;
+    return t === z.wildcard && e.boostDocument == null && this._options.searchOptions.boostDocument == null || i.sort(q), i;
   }
   /**
    * Provide suggestions for the given search query
@@ -1184,14 +1184,14 @@ class v {
     const { documentCount: s, nextId: i, fieldIds: o, averageFieldLength: r, dirtCount: c, serializationVersion: u } = t;
     if (u !== 1 && u !== 2)
       throw new Error("MiniSearch: cannot deserialize an index created with an incompatible version");
-    const d = new v(e);
+    const d = new z(e);
     return d._documentCount = s, d._nextId = i, d._idToShortId = /* @__PURE__ */ new Map(), d._fieldIds = o, d._avgFieldLength = r, d._dirtCount = c || 0, d._index = new b(), d;
   }
   /**
    * @ignore
    */
   executeQuery(t, e = {}) {
-    if (t === v.wildcard)
+    if (t === z.wildcard)
       return this.executeWildcardQuery(e);
     if (typeof t != "string") {
       const a = Object.assign(Object.assign(Object.assign({}, e), t), { queries: void 0 }), m = t.queries.map((_) => this.executeQuery(_, a));
@@ -1418,7 +1418,7 @@ class v {
     }
   }
 }
-v.wildcard = Symbol("*");
+z.wildcard = Symbol("*");
 const T = (n, t) => Object.prototype.hasOwnProperty.call(n, t) ? n[t] : void 0, nt = {
   [W]: (n, t) => {
     for (const e of t.keys()) {
@@ -1505,7 +1505,7 @@ async function ht() {
   return await n.json();
 }
 function at(n) {
-  const t = new v({
+  const t = new z({
     fields: ["title", "excerpt", "content", "route"],
     // fields to index for full-text search
     storeFields: ["title", "excerpt", "content", "route"]
@@ -1532,12 +1532,10 @@ function _t() {
   return Array.from(n);
 }
 function pt(n, t) {
-  n.filter((e) => {
+  n.forEach((e) => {
     var r;
     const s = ((r = e.querySelector("a")) == null ? void 0 : r.href) || "", o = new URL(s).pathname;
-    return !t.includes(o);
-  }).forEach((e) => {
-    e.style.display = "none";
+    t.includes(o) ? e.classList.remove("hidden") : e.classList.add("hidden");
   });
 }
 async function wt() {

@@ -7,13 +7,16 @@ import (
 templ Header() {
 	<header>
 		<div>
-			<a href="/">{ config.Title }</a>
-			<form action="/search" method="get" id="search-form">
-				<input type="text" name="search" placeholder="Search..."/>
-				<button type="submit">
-					@SearchIcon()
-				</button>
-			</form>
+			<a href="/" class="logo">{ config.Title }</a>
+			<nav>
+				<form action="/search" method="get" id="search-form">
+					<input type="text" name="search" placeholder="Search..."/>
+					<button type="submit">
+						@SearchIcon()
+					</button>
+				</form>
+				<a href="/docs">Docs</a>
+			</nav>
 		</div>
 	</header>
 }

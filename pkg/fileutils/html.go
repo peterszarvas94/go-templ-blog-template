@@ -2,9 +2,7 @@ package fileutils
 
 import (
 	"context"
-	"fmt"
 	"io"
-	"strings"
 
 	"github.com/a-h/templ"
 )
@@ -37,21 +35,21 @@ func StripHTMLTags(input string) string {
 }
 
 // Not in use in favor of StripHTMLTags, might change in the future
-func GetFirsParagraphExcrept(input string) string {
-	parts := strings.Split(input, "<p>")
-
-	if len(parts) < 2 {
-		return ""
-	}
-
-	afterOpeningTag := parts[1]
-	parts = strings.Split(afterOpeningTag, "</p>")
-	beforeClosingTag := parts[0]
-
-	if len(beforeClosingTag) > 120 {
-		excerpt := fmt.Sprintf("%s...", beforeClosingTag[:120])
-		return excerpt
-	}
-
-	return beforeClosingTag
-}
+// func GetFirsParagraphExcrept(input string) string {
+// 	parts := strings.Split(input, "<p>")
+//
+// 	if len(parts) < 2 {
+// 		return ""
+// 	}
+//
+// 	afterOpeningTag := parts[1]
+// 	parts = strings.Split(afterOpeningTag, "</p>")
+// 	beforeClosingTag := parts[0]
+//
+// 	if len(beforeClosingTag) > 120 {
+// 		excerpt := fmt.Sprintf("%s...", beforeClosingTag[:120])
+// 		return excerpt
+// 	}
+//
+// 	return beforeClosingTag
+// }

@@ -20,17 +20,18 @@ type FrontMatter struct {
 	Date     string   `yaml:"date"`
 	Time     string   `yaml:"time"`
 	Excerpt  string   `yaml:"excerpt"`
+	Hidden   bool     `yaml:"hidden"`
 }
 
-func parseFrontMatter(input string) (FrontMatter, string, error) {
+func parseFrontMatter(input string) (FrontMatter, string) {
 	var frontMatter FrontMatter
 
 	body, err := frontmatter.MustParse(strings.NewReader(input), &frontMatter)
 	if err != nil {
-		return frontMatter, "", err
+		return frontMatter, input
 	}
 
-	return frontMatter, string(body), nil
+	return frontMatter, string(body)
 }
 
 func parseFileContent(input string) (string, error) {
@@ -54,15 +55,15 @@ func parseFileContent(input string) (string, error) {
 	return buf.String(), nil
 }
 
-func parseDateTime(matter *FrontMatter) (time.Time, error) {
+func parseDateTime(matter *FrontMatter) time.Time {
 	parsedDate, err := time.Parse(config.DateLayout, matter.Date)
 	if err != nil {
-		return time.Now(), err
+		return time.Now()
 	}
 
 	parseTime, err := time.Parse(config.TimeLayout, matter.Time)
 	if err != nil {
-		return time.Now(), err
+		return time.Now()
 	}
 
 	dateTime := time.Date(
@@ -76,5 +77,5 @@ func parseDateTime(matter *FrontMatter) (time.Time, error) {
 		time.Local,
 	)
 
-	return dateTime, nil
+	return dateTime
 }

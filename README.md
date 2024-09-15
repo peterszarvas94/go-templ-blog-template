@@ -20,7 +20,6 @@
 
 - `make templ`: start templ file generation in watch mode
 - `make dev`: start dev server with hot reload
-  [http://localhost:7331](http://localhost:7331)
 
 ### SSR (Server Side Rendering) mode
 
@@ -35,7 +34,6 @@ You can put these static files to any server. You can serve them with
 **lytepage** as well:
 
 - `make ssg`: start static file server
-  [http://localhost:8080](http://localhost:8080)
 
 ## Themes
 
@@ -71,7 +69,7 @@ type (
 
 ### Default theme
 
-The default theme used for [lytepage](https://lytepage.peterszarvas.hu) demo
+The default theme used for the [lytepage](https://lytepage.peterszarvas.hu)
 site, is included in this repo, under `theme` folder.
 
 ### Switching themes
@@ -84,16 +82,19 @@ saved anywhere else.
 ## Content
 
 You should put your content in the `content` folder in any folder structure,
-using `.md` files with [frontmatter](#post). There are protected routes which
-you can not use, and it will cause the program to panic. These are the
-following:
+using `.md` files with
+[frontmatter](https://github.com/peterszarvas94/lytepage#post). There are
+protected routes which you can not use, and it will cause the program to panic.
+These are the following:
 
 - 404
 - static
 - tag
 - category
 
-as well as any [custom route](#custom) you define.
+as well as any
+[custom route](https://github.com/peterszarvas94/lytepage#custom-routes) you
+define.
 
 ## Routes
 
@@ -116,10 +117,11 @@ In dev and SSR modes, catch-all logic is handled as well.
 
 ### Index
 
-The homepage is meant to display the latest posts, like in other blog-styled
-frameworks. You can use an empty slice of course, if you want a custom homepage.
+The homepage displas the latest posts, like in other blog-styled frameworks. You
+can define a [custom](https://github.com/peterszarvas94/lytepage#custom-routes)
+index page of course.
 
-### Post {#post}
+### Post
 
 The post page should display an individual article / post.
 
@@ -187,7 +189,7 @@ tags: ["tag1", "tag2"]
 
 In the above example, `/tag/tag1` and `/tag/tag2` pages are generated.
 
-### Custom routes {#custom}
+### Custom routes
 
 You can define custom routes in `pkg/custom/custom.go` by adding element to the
 `Routes` map:
@@ -198,7 +200,8 @@ var Routes = &routeMap{
 }
 ```
 
-E.g.: [/custom](/custom)
+E.g. the landing page of [lytepage](https://lytepage.peterszarvas.hu) site is a
+custom route.
 
 ## Search
 

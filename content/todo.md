@@ -15,8 +15,11 @@ excerpt: "Way to prod"
 - [x] add contact info and some about info
 - [x] custom routes and components
 - [x] custom home page opt-in
-- [ ] killer home page
+- [x] killer home page
 - [ ] documentations an tutorials
+- [ ] update readme files (github and online)
+- [ ] fix link for github readme
+- [ ] include font and highligh js files, not as dependency but as vendor code
 
 ## 0.2
 

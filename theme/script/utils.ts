@@ -56,18 +56,14 @@ export function getArticles(): HTMLElement[] {
 }
 
 export function filterArticles(articles: HTMLElement[], routes: any[]) {
-  articles
-    .filter((atricle) => {
-      const href = atricle.querySelector("a")?.href || "";
-      const url = new URL(href);
-      const pathname = url.pathname;
-      if (routes.includes(pathname)) {
-        return false;
-      } else {
-        return true;
-      }
-    })
-    .forEach((atricle) => {
-      atricle.style.display = "none";
-    });
+  articles.forEach((article) => {
+    const href = article.querySelector("a")?.href || "";
+    const url = new URL(href);
+    const pathname = url.pathname;
+    if (routes.includes(pathname)) {
+      article.classList.remove("hidden");
+    } else {
+      article.classList.add("hidden");
+    }
+  });
 }

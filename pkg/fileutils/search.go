@@ -19,15 +19,17 @@ func getFilesJson() (string, error) {
 	count := 0
 
 	for _, file := range files {
-		fileJson := &FileJson{
-			Id:      count, // TODO unique id on gen?
-			Title:   file.Matter.Title,
-			Excerpt: file.Matter.Excerpt,
-			Content: file.Content,
-			Route:   file.Fileroute,
+		if file.Matter.Hidden != true {
+			fileJson := &FileJson{
+				Id:      count, // TODO unique id on gen?
+				Title:   file.Matter.Title,
+				Excerpt: file.Matter.Excerpt,
+				Content: file.Content,
+				Route:   file.Fileroute,
+			}
+			allFiles = append(allFiles, fileJson)
+			count = count + 1
 		}
-		allFiles = append(allFiles, fileJson)
-		count = count + 1
 	}
 
 	jsonData, err := json.MarshalIndent(allFiles, "", "  ")

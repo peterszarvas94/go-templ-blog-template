@@ -18,7 +18,7 @@ templ tagBody(tag string, files []*fileutils.FileData) {
 			<h1>
 				<div>{ fmt.Sprintf("# %s", tag) }</div>
 			</h1>
-			@components.ArticleList(files)
+			@components.ArticleList(files, false)
 		</main>
 		@components.Footer()
 	</body>

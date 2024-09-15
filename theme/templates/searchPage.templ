@@ -19,7 +19,7 @@ templ searchBody(files []*fileutils.FileData) {
 		@components.Header()
 		<main class="page index-page">
 			<h1>{ config.IndexTitle }</h1>
-			@components.ArticleList(files)
+			@components.ArticleList(files, true)
 		</main>
 		@components.Footer()
 	</body>

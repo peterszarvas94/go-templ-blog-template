@@ -18,7 +18,9 @@ templ postBody(post *fileutils.FileData) {
 		<main class="page post-page">
 			<h1>{ post.Matter.Title }</h1>
 			<time>{ post.DateTime.Format(fmt.Sprintf("%s %s", config.DateLayout, config.TimeLayout)) }</time>
-			@components.Category(post.Matter.Category)
+			if post.Matter.Category != "" {
+				@components.Category(post.Matter.Category)
+			}
 			<div class="tags">
 				<ul>
 					for _, tag := range post.Matter.Tags {

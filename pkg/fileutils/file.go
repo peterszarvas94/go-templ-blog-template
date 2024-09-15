@@ -25,6 +25,16 @@ func GetFiles() []*FileData {
 	return files
 }
 
+func GetFileByTitle(title string) *FileData {
+	for _, file := range files {
+		if file.Matter.Title == title {
+			return file
+		}
+	}
+
+	return nil
+}
+
 func CollectFiles() (int, error) {
 	files = files[:0] // Clear the existing slice
 
@@ -68,10 +78,7 @@ func processFile(path string) (*FileData, error) {
 	}
 
 	rawContent := string(contentBytes)
-	matter, rawBody, err := parseFrontMatter(rawContent)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse front matter from file %s: %w", path, err)
-	}
+	matter, rawBody := parseFrontMatter(rawContent)
 
 	html, err := parseFileContent(rawBody)
 	if err != nil {
@@ -80,10 +87,7 @@ func processFile(path string) (*FileData, error) {
 
 	fileroute := strings.TrimSuffix(strings.TrimPrefix(path, "content"), ".md")
 
-	dateTime, err := parseDateTime(&matter)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse date time from file %s: %w", path, err)
-	}
+	dateTime := parseDateTime(&matter)
 
 	content := StripHTMLTags(html)
 

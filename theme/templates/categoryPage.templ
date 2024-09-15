@@ -18,7 +18,7 @@ templ categoryBody(category string, files []*fileutils.FileData) {
 				@components.CategoryIcon()
 				<div>{ category }</div>
 			</h1>
-			@components.ArticleList(files)
+			@components.ArticleList(files, false)
 		</main>
 		@components.Footer()
 	</body>

@@ -11,6 +11,6 @@ type routeMap map[string]templ.Component
 
 var Routes = &routeMap{
 	"/search": templates.SearchPage(fileutils.GetFiles()),
-	"/":       templates.CustomIndexPage(),
-	"/posts":  templates.PostsPage(fileutils.GetFiles()),
+	"/":       templates.CustomIndexPage(fileutils.GetFileByTitle("index")),
+	"/docs":   templates.PostsPage(fileutils.GetFiles()),
 }
